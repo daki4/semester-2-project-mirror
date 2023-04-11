@@ -26,7 +26,7 @@ public static class Program
             "3dPrinterUsr",
             "somepassword"
             );
-        await mqtt.Subscribe("3dPrinter/1/heater");
+        await mqtt.Subscribe("3dPrinter/1/heater/#");
         await mqtt.Publish("test", "test2");
         Application.Run(new Form1());
 
