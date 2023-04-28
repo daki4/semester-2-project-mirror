@@ -1,7 +1,7 @@
-using DesktopApplication.MqttProvider;
+using PrinterApplication.Mqtt;
 using System.Diagnostics;
 
-namespace DesktopApplication;
+namespace PrinterApplication.DesktopApplication;
 
 public static class Program
 {
@@ -21,13 +21,18 @@ public static class Program
         //    Environment.GetEnvironmentVariable("MQTT_URL"),
         //    Environment.GetEnvironmentVariable("MQTT_USER"),
         //    Environment.GetEnvironmentVariable("MQTT_PASSWORD"));
-        IMqttProvider mqtt = new MqttProvider.MqttProvider(
+        IMqttProvider mqtt = new MqttProvider(
             "mqtt.yordanmitev.me",
             "3dPrinterUsr",
             "somepassword"
             );
-        await mqtt.Subscribe("3dPrinter/1/heater/#");
+        await mqtt.Subscribe("3dPrinter/1/#");
         await mqtt.Publish("test", "test2");
+        mqtt.RegisterActionMessageReceived(async e =>
+        {
+            Dispatcher.HandleMessage(new object(), e);
+        });
+
         Application.Run(new Form1());
 
         mqtt.Stop();

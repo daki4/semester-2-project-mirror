@@ -9,10 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MQTTnet" Version="4.1.4.563" />
-    <PackageReference Include="MQTTnet.Extensions.ManagedClient" Version="4.1.4.563" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\Mqtt\Mqtt.csproj" />
+    <ProjectReference Include="..\Storage\Storage.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,10 +3,8 @@ using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
 using MQTTnet.Packets;
 using MQTTnet.Server;
-using Serilog;
-using System.Text;
 
-namespace DesktopApplication.MqttProvider;
+namespace PrinterApplication.Mqtt;
 
 public class MqttProvider : IMqttProvider
 {
@@ -70,7 +68,7 @@ public class MqttProvider : IMqttProvider
         }
         clientOptions.Build();
         var managedClientOptions = options.WithClientOptions(clientOptions).Build();
-        managedMqttClientSubscriber.ApplicationMessageReceivedAsync += HandleReceivedMessage;
+        //managedMqttClientSubscriber.ApplicationMessageReceivedAsync += HandleReceivedMessage;
 
         await managedMqttClientSubscriber.StartAsync(managedClientOptions);
         await managedMqttClientPublisher.StartAsync(managedClientOptions);
@@ -130,19 +128,13 @@ public class MqttProvider : IMqttProvider
             _managedMqttClientPublisher.Dispose();
         }
     }
-
-    /// <summary>
-    /// This is the handler that contains the code for the message processing.
-    /// </summary>
-    /// <param name="args"></param>
-    /// <returns></returns>
-    // TODO: Implement here the code for the advanced message processing with the help event invocations.
-    private Task HandleReceivedMessage(MqttApplicationMessageReceivedEventArgs args)
+    
+    public void RegisterActionMessageReceived(Func<MqttApplicationMessageReceivedEventArgs, Task> action)
     {
-        var message = Encoding.UTF8.GetString(args.ApplicationMessage.Payload);
-        var topic = args.ApplicationMessage.Topic;
-        Log.Information($"Received message from topic {topic}: {message}");
-        SendTextToGui.RaiseTextReceivedEvent(this, new TextTransferEventArgs(message));
-        return Task.CompletedTask;
+        if (_managedMqttClientSubscriber == null)
+        {
+            return;
+        }
+        _managedMqttClientSubscriber.ApplicationMessageReceivedAsync += action;
     }
 }
