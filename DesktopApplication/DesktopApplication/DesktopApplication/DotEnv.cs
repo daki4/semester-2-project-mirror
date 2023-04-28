@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using System.Diagnostics;
 
-namespace DesktopApplication;
+namespace PrinterApplication.DesktopApplication;
 
 public static class DotEnv
 {
