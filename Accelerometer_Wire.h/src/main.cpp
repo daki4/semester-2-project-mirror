@@ -170,7 +170,5 @@ void loop()
   // Serial.println(z_out, 2);
   // Serial.println("----");
 
-  client.publish("3dPrinter/1/accelerometer/", x_str.c_str());
-  client.publish("3dPrinter/1/accelerometer/", y_str.c_str());
-  client.publish("3dPrinter/1/accelerometer/", z_str.c_str());
+  client.publish("3dPrinter/1/accelerometer/", (x_str + y_str + z_str).c_str());
 }
