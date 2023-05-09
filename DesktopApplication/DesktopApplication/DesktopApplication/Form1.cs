@@ -1,12 +1,15 @@
 namespace PrinterApplication.DesktopApplication;
-using PrinterApplication.Models;
+
+using PrinterApplication.Mqtt;
 using PrinterApplication.Storage;
 
 public partial class Form1 : Form
 {
-    public Form1()
+    IMqttProvider _provider;
+    public Form1(IMqttProvider provider)
     {
         InitializeComponent();
+        _provider = provider;
 
         DoorStorage.OnDoorStateChanged += OnDoorStateChanged;
         TemperatureStorage.TemperatureChanged += OnTemperatureChanged;
@@ -16,11 +19,18 @@ public partial class Form1 : Form
         HeaterStorage.HeaterStateChanged += OnHeaterStateChanged;
         AccelerometerStorage.OnAccelerometerBalancedStateChanged += OnAccelerometerBalancedStateChanged;
         AccelerometerStorage.OnAccelerometerDataReceived += OnAccelerometerDataReceived;
+        FanStatusStorage.OnFanStatusChanged += OnFanStatusChanged;
+    }
+
+    private void OnFanStatusChanged(object? sender, FanStatusChangedEventArgs e)
+    {
+        lblFanStatus.Text = e.status.IsOn ? "On" : "Off";
+        lblFanStatus.ForeColor = e.status.IsOn ? Color.Black : Color.Red;
     }
 
     private void OnAccelerometerDataReceived(object _, AccelerometerEventArgs e)
     {
-        // TODO: add feature
+        lblAccelerometerBalanced.Text = e.Accelerometer.IsBalanced ? "Balanced" : "Not Balanced";
     }
 
 
@@ -31,7 +41,7 @@ public partial class Form1 : Form
             Invoke(new MethodInvoker(() => { OnAccelerometerBalancedStateChanged(_, e); }));
         }
         lblAccelerometerBalanced.Text = e.IsBalanced ? "Yes" : "No";
-            lblAccelerometerBalanced.ForeColor = e.IsBalanced ? Color.Black : Color.Red;
+        lblAccelerometerBalanced.ForeColor = e.IsBalanced ? Color.Black : Color.Red;
     }
 
     private void OnDoorStateChanged(object _, DoorStateChangedEventArgs e)
@@ -41,18 +51,17 @@ public partial class Form1 : Form
             Invoke(new MethodInvoker(() => { OnDoorStateChanged(_, e); }));
         }
         lblDoorStatus.Text = e.IsOpen ? "Open" : "Closed";
-            lblDoorStatus.ForeColor = e.IsOpen ? Color.Red : Color.Black;
+        lblDoorStatus.ForeColor = e.IsOpen ? Color.Red : Color.Black;
     }
 
     private void OnTemperatureChanged(object _, TemperatureChangedEventArgs e)
     {
         if (InvokeRequired)
         {
-            Invoke(OnTemperatureChanged);
+            Invoke(new MethodInvoker(() => { OnTemperatureChanged(_, e); }));
             return;
         }
-            lblTemperature.Text = $"{e.Temperature.Reading}C";
-            lblFanStatus.Text = e.Temperature.IsFanOn ? "On" : "Off";
+        lblTemperature.Text = $"{e.Temperature.Reading}C";
     }
 
     private void OnResinReceived(object _, ResinReceivedEventArgs e)
@@ -61,7 +70,7 @@ public partial class Form1 : Form
         {
             Invoke(new MethodInvoker(() => { OnResinReceived(_, e); }));
             return;
-        } 
+        }
         lblResinLevel.Text = $"{e.Resin.Level}%";
     }
 
@@ -94,13 +103,14 @@ public partial class Form1 : Form
             Invoke(new MethodInvoker(() => { OnHeaterStateChanged(_, e); }));
             return;
         }
-            lblHeaterStatus.Text = e.Heater.IsOn ? "On" : "Off";
-            lblHeaterStatus.ForeColor = e.Heater.IsOn ? Color.Black : Color.Red;
+        lblHeaterStatus.Text = e.Heater.IsOn ? "On" : "Off";
+        lblHeaterStatus.ForeColor = e.Heater.IsOn ? Color.Black : Color.Red;
     }
 
     private void btnSetTargetTemperature_Click(object sender, EventArgs e)
     {
         // TODO: Implement
-        throw new NotImplementedException("not implemented yet");
+        _provider.Publish("3dPrinter/1/temperature/target", tbSetTargetTemperature.Text);
+        lblTargetTemperature.Text = tbSetTargetTemperature.Text;
     }
 }

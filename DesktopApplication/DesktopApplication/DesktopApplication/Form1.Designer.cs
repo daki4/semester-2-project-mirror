@@ -37,6 +37,9 @@ partial class Form1
             System.Windows.Forms.Label label9;
             System.Windows.Forms.Label label13;
             System.Windows.Forms.Label label3;
+            System.Windows.Forms.Label label14;
+            System.Windows.Forms.Label label15;
+            System.Windows.Forms.Label label16;
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblLowResinLevel = new System.Windows.Forms.Label();
             this.lblResinLevel = new System.Windows.Forms.Label();
@@ -54,9 +57,11 @@ partial class Form1
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.lblAccelerometerBalanced = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.lblTargetTemperature = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.btnSetTargetTemperature = new System.Windows.Forms.Button();
             this.tbSetTargetTemperature = new System.Windows.Forms.TextBox();
             this.lblHeaterStatus = new System.Windows.Forms.Label();
@@ -72,6 +77,9 @@ partial class Form1
             label9 = new System.Windows.Forms.Label();
             label13 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
+            label14 = new System.Windows.Forms.Label();
+            label15 = new System.Windows.Forms.Label();
+            label16 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.StepperMotors.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -91,9 +99,9 @@ partial class Form1
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(147, 19);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(60, 15);
+            label1.Size = new System.Drawing.Size(65, 15);
             label1.TabIndex = 21;
-            label1.Text = "Resin low:";
+            label1.Text = "Resin level:";
             // 
             // label7
             // 
@@ -157,6 +165,33 @@ partial class Form1
             label3.Size = new System.Drawing.Size(29, 15);
             label3.TabIndex = 20;
             label3.Text = "Fan:";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(11, 170);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(17, 15);
+            label14.TabIndex = 35;
+            label14.Text = "X:";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new System.Drawing.Point(11, 219);
+            label15.Name = "label15";
+            label15.Size = new System.Drawing.Size(17, 15);
+            label15.TabIndex = 36;
+            label15.Text = "Z:";
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new System.Drawing.Point(11, 194);
+            label16.Name = "label16";
+            label16.Size = new System.Drawing.Size(17, 15);
+            label16.TabIndex = 37;
+            label16.Text = "Y:";
             // 
             // groupBox2
             // 
@@ -325,14 +360,19 @@ partial class Form1
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.lblAccelerometerBalanced);
+            this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(label13);
-            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.lblTargetTemperature);
+            this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(label12);
             this.groupBox1.Controls.Add(this.btnSetTargetTemperature);
+            this.groupBox1.Controls.Add(label16);
             this.groupBox1.Controls.Add(label11);
+            this.groupBox1.Controls.Add(label14);
             this.groupBox1.Controls.Add(this.tbSetTargetTemperature);
+            this.groupBox1.Controls.Add(label15);
             this.groupBox1.Controls.Add(label9);
             this.groupBox1.Controls.Add(this.lblHeaterStatus);
             this.groupBox1.Controls.Add(this.lblDoorStatus);
@@ -350,6 +390,15 @@ partial class Form1
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Environment";
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(34, 194);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(13, 15);
+            this.label17.TabIndex = 40;
+            this.label17.Text = "0";
+            // 
             // lblAccelerometerBalanced
             // 
             this.lblAccelerometerBalanced.AutoSize = true;
@@ -358,18 +407,16 @@ partial class Form1
             this.lblAccelerometerBalanced.Name = "lblAccelerometerBalanced";
             this.lblAccelerometerBalanced.Size = new System.Drawing.Size(24, 15);
             this.lblAccelerometerBalanced.TabIndex = 34;
-            this.lblAccelerometerBalanced.Text = "Off";
+            this.lblAccelerometerBalanced.Text = "Yes";
             // 
-            // groupBox3
+            // label18
             // 
-            this.groupBox3.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.groupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.groupBox3.Location = new System.Drawing.Point(6, 176);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(265, 124);
-            this.groupBox3.TabIndex = 32;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Reserved for accelerometer & other environment-related features";
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(35, 219);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(13, 15);
+            this.label18.TabIndex = 39;
+            this.label18.Text = "0";
             // 
             // lblTargetTemperature
             // 
@@ -380,6 +427,15 @@ partial class Form1
             this.lblTargetTemperature.Size = new System.Drawing.Size(43, 15);
             this.lblTargetTemperature.TabIndex = 31;
             this.lblTargetTemperature.Text = "123123";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(34, 170);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(13, 15);
+            this.label19.TabIndex = 38;
+            this.label19.Text = "0";
             // 
             // btnSetTargetTemperature
             // 
@@ -416,9 +472,9 @@ partial class Form1
             this.lblDoorStatus.ForeColor = System.Drawing.Color.Black;
             this.lblDoorStatus.Location = new System.Drawing.Point(206, 44);
             this.lblDoorStatus.Name = "lblDoorStatus";
-            this.lblDoorStatus.Size = new System.Drawing.Size(24, 15);
+            this.lblDoorStatus.Size = new System.Drawing.Size(43, 15);
             this.lblDoorStatus.TabIndex = 24;
-            this.lblDoorStatus.Text = "Off";
+            this.lblDoorStatus.Text = "Closed";
             // 
             // lblTemperature
             // 
@@ -489,7 +545,9 @@ partial class Form1
     private Label lblTargetTemperature;
     private Button btnSetTargetTemperature;
     private TextBox tbSetTargetTemperature;
-    private GroupBox groupBox3;
     private Label label10;
     private Label lblAccelerometerBalanced;
+    private Label label17;
+    private Label label18;
+    private Label label19;
 }

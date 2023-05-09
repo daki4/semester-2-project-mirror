@@ -33,7 +33,7 @@ public static class Program
             Dispatcher.HandleMessage(new object(), e);
         });
 
-        Application.Run(new Form1());
+        Application.Run(new Form1(mqtt));
 
         mqtt.Stop();
     }

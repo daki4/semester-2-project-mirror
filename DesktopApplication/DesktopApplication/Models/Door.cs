@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PrinterApplication.Models;
+﻿namespace PrinterApplication.Models;
 public class Door
 {
     public bool IsOpen { get; }

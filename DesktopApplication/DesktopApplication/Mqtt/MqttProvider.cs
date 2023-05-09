@@ -128,7 +128,7 @@ public class MqttProvider : IMqttProvider
             _managedMqttClientPublisher.Dispose();
         }
     }
-    
+
     public void RegisterActionMessageReceived(Func<MqttApplicationMessageReceivedEventArgs, Task> action)
     {
         if (_managedMqttClientSubscriber == null)

@@ -1,9 +1,4 @@
 ﻿using PrinterApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PrinterApplication.Storage;
 public class AccelerometerStorage
@@ -12,7 +7,9 @@ public class AccelerometerStorage
     public static event EventHandler<AccelerometerEventArgs>? OnAccelerometerDataReceived;
     public static event EventHandler<AccelerometeBalancedStateChangedEventArgs>? OnAccelerometerBalancedStateChanged;
 
-    public static void Add(Accelerometer accelerometer) {
+    // TODO: use this method and debug this method
+    public static void Add(Accelerometer accelerometer)
+    {
         _accelerometer.Add(accelerometer);
         OnAccelerometerDataReceived?.Invoke(new object(), new(accelerometer));
         if (_accelerometer.SkipLast(1).Last().IsBalanced != accelerometer.IsBalanced)

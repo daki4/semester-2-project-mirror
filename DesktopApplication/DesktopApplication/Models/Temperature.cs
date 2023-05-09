@@ -3,16 +3,14 @@
 public class Temperature
 {
     public double Reading { get; }
-    public bool IsFanOn { get; }
 
-    public Temperature(double reading, bool isFanOn = false)
+    public Temperature(double reading)
     {
         Reading = reading;
-        IsFanOn = isFanOn;
     }
-    
+
     public override string ToString()
     {
-        return $"Reading: {Reading}, IsFanOn: {IsFanOn}";
+        return $"Reading: {Reading}";
     }
 }
