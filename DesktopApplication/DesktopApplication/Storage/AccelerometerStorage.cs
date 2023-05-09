@@ -14,10 +14,10 @@ public class AccelerometerStorage
 
     public static void Add(Accelerometer accelerometer) {
         _accelerometer.Add(accelerometer);
-        OnAccelerometerDataReceived?.Invoke(new object(), new AccelerometerEventArgs(accelerometer));
+        OnAccelerometerDataReceived?.Invoke(new object(), new(accelerometer));
         if (_accelerometer.SkipLast(1).Last().IsBalanced != accelerometer.IsBalanced)
         {
-            OnAccelerometerBalancedStateChanged?.Invoke(new object(), new AccelerometeBalancedStateChangedEventArgs(accelerometer.IsBalanced));
+            OnAccelerometerBalancedStateChanged?.Invoke(new object(), new(accelerometer.IsBalanced));
         }
     }
 }

@@ -17,14 +17,14 @@ public static class ResinStorage
     public static void Add(Resin resin)
     {
         _resin.Add(resin);
-        ResinLevelLow?.Invoke(new object(), new ResinLevelLowEventArgs(resin));
+        ResinLevelLow?.Invoke(new object(), new(resin));
         if (resin.IsLow)
         {
-            ResinReceived?.Invoke(new object(), new ResinReceivedEventArgs(resin));
+            ResinReceived?.Invoke(new object(), new(resin));
         }
         if (resin.Level > _resin.SkipLast(1).Last().Level)
         {
-            ResinRefilled?.Invoke(new object(), new ResinRefilledEventArgs(resin));
+            ResinRefilled?.Invoke(new object(), new(resin));
         }
     }
 

@@ -16,7 +16,7 @@ public static class DoorStorage
     {
         _door.Add(door);
         if (_door.SkipLast(1).Last().IsOpen != door.IsOpen) {
-            OnDoorStateChanged?.Invoke(new object(), new DoorStateChangedEventArgs(door.IsOpen));
+            OnDoorStateChanged?.Invoke(new object(), new(door.IsOpen));
         }
     }
 

@@ -10,7 +10,7 @@ public static class HeaterStorage
     public static void Add(Heater heater)
     {
         _heater.Add(heater);
-        HeaterStateChanged?.Invoke(new object(), new HeaterStateChangedEventArgs(heater));
+        HeaterStateChanged?.Invoke(new object(), new(heater));
     }
 
     public static IReadOnlyCollection<Heater> Heater => _heater.AsReadOnly();

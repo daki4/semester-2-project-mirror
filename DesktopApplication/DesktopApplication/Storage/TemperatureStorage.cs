@@ -9,7 +9,7 @@ public static class TemperatureStorage
     public static void Add(Temperature temperature)
     {
         _temperatures.Add(temperature);
-        TemperatureChanged?.Invoke(new object(), new TemperatureChangedEventArgs(temperature));
+        TemperatureChanged?.Invoke(new object(), new(temperature));
     }
 
     public static IReadOnlyCollection<Temperature> Temperature => _temperatures;
