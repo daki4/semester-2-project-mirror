@@ -22,8 +22,12 @@ public partial class Form1 : Form
         FanStatusStorage.OnFanStatusChanged += OnFanStatusChanged;
     }
 
-    private void OnFanStatusChanged(object? sender, FanStatusChangedEventArgs e)
+    private void OnFanStatusChanged(object? _, FanStatusChangedEventArgs e)
     {
+        if (InvokeRequired)
+        {
+            Invoke(new MethodInvoker(() => { OnFanStatusChanged(_, e); }));
+        }
         lblFanStatus.Text = e.status.IsOn ? "On" : "Off";
         lblFanStatus.ForeColor = e.status.IsOn ? Color.Black : Color.Red;
     }
