@@ -30,7 +30,14 @@ public partial class Form1 : Form
 
     private void OnAccelerometerDataReceived(object _, AccelerometerEventArgs e)
     {
-        lblAccelerometerBalanced.Text = e.Accelerometer.IsBalanced ? "Balanced" : "Not Balanced";
+        //lblAccelerometerBalanced.Text = e.Accelerometer.IsLeveled ? "Leveled" : "Not leveled";
+        if(InvokeRequired)
+        {
+            Invoke(new MethodInvoker(() => { OnAccelerometerDataReceived(_, e); }));
+        }
+        lblAccelerationX.Text = $" {e.Accelerometer.X}";
+        lblAccelerationY.Text = $" {e.Accelerometer.Y}";
+        lblAccelerationZ.Text = $" {e.Accelerometer.Z}";
     }
 
 
@@ -40,8 +47,8 @@ public partial class Form1 : Form
         {
             Invoke(new MethodInvoker(() => { OnAccelerometerBalancedStateChanged(_, e); }));
         }
-        lblAccelerometerBalanced.Text = e.IsBalanced ? "Yes" : "No";
-        lblAccelerometerBalanced.ForeColor = e.IsBalanced ? Color.Black : Color.Red;
+        lblAccelerometerBalanced.Text = e.IsLeveled ? "Yes" : "No";
+        lblAccelerometerBalanced.ForeColor = e.IsLeveled ? Color.Black : Color.Red;
     }
 
     private void OnDoorStateChanged(object _, DoorStateChangedEventArgs e)
