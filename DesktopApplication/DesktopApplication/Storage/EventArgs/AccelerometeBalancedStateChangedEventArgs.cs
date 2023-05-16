@@ -1,10 +1,10 @@
 ﻿namespace PrinterApplication.Storage;
 public class AccelerometeBalancedStateChangedEventArgs
 {
-    public bool IsBalanced { get; }
+    public bool IsLeveled { get; }
 
     public AccelerometeBalancedStateChangedEventArgs(bool isBalanced)
     {
-        IsBalanced = isBalanced;
+        IsLeveled = isBalanced;
     }
 }

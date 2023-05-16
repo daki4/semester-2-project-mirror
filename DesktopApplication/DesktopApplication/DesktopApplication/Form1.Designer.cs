@@ -57,11 +57,11 @@ partial class Form1
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.lblAccelerationY = new System.Windows.Forms.Label();
             this.lblAccelerometerBalanced = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.lblAccelerationZ = new System.Windows.Forms.Label();
             this.lblTargetTemperature = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
+            this.lblAccelerationX = new System.Windows.Forms.Label();
             this.btnSetTargetTemperature = new System.Windows.Forms.Button();
             this.tbSetTargetTemperature = new System.Windows.Forms.TextBox();
             this.lblHeaterStatus = new System.Windows.Forms.Label();
@@ -151,11 +151,11 @@ partial class Form1
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(164, 95);
+            label13.Location = new System.Drawing.Point(11, 250);
             label13.Name = "label13";
-            label13.Size = new System.Drawing.Size(58, 15);
+            label13.Size = new System.Drawing.Size(82, 15);
             label13.TabIndex = 33;
-            label13.Text = "Balanced:";
+            label13.Text = "Leveling state:";
             // 
             // label3
             // 
@@ -360,12 +360,12 @@ partial class Form1
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label17);
+            this.groupBox1.Controls.Add(this.lblAccelerationY);
             this.groupBox1.Controls.Add(this.lblAccelerometerBalanced);
-            this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.lblAccelerationZ);
             this.groupBox1.Controls.Add(label13);
             this.groupBox1.Controls.Add(this.lblTargetTemperature);
-            this.groupBox1.Controls.Add(this.label19);
+            this.groupBox1.Controls.Add(this.lblAccelerationX);
             this.groupBox1.Controls.Add(label12);
             this.groupBox1.Controls.Add(this.btnSetTargetTemperature);
             this.groupBox1.Controls.Add(label16);
@@ -390,33 +390,33 @@ partial class Form1
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Environment";
             // 
-            // label17
+            // lblAccelerationY
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(34, 194);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(13, 15);
-            this.label17.TabIndex = 40;
-            this.label17.Text = "0";
+            this.lblAccelerationY.AutoSize = true;
+            this.lblAccelerationY.Location = new System.Drawing.Point(34, 194);
+            this.lblAccelerationY.Name = "lblAccelerationY";
+            this.lblAccelerationY.Size = new System.Drawing.Size(13, 15);
+            this.lblAccelerationY.TabIndex = 40;
+            this.lblAccelerationY.Text = "0";
             // 
             // lblAccelerometerBalanced
             // 
             this.lblAccelerometerBalanced.AutoSize = true;
             this.lblAccelerometerBalanced.ForeColor = System.Drawing.Color.Black;
-            this.lblAccelerometerBalanced.Location = new System.Drawing.Point(225, 95);
+            this.lblAccelerometerBalanced.Location = new System.Drawing.Point(88, 250);
             this.lblAccelerometerBalanced.Name = "lblAccelerometerBalanced";
-            this.lblAccelerometerBalanced.Size = new System.Drawing.Size(24, 15);
+            this.lblAccelerometerBalanced.Size = new System.Drawing.Size(112, 15);
             this.lblAccelerometerBalanced.TabIndex = 34;
-            this.lblAccelerometerBalanced.Text = "Yes";
+            this.lblAccelerometerBalanced.Text = "Leveled/Not leveled";
             // 
-            // label18
+            // lblAccelerationZ
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(35, 219);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(13, 15);
-            this.label18.TabIndex = 39;
-            this.label18.Text = "0";
+            this.lblAccelerationZ.AutoSize = true;
+            this.lblAccelerationZ.Location = new System.Drawing.Point(35, 219);
+            this.lblAccelerationZ.Name = "lblAccelerationZ";
+            this.lblAccelerationZ.Size = new System.Drawing.Size(13, 15);
+            this.lblAccelerationZ.TabIndex = 39;
+            this.lblAccelerationZ.Text = "0";
             // 
             // lblTargetTemperature
             // 
@@ -428,14 +428,14 @@ partial class Form1
             this.lblTargetTemperature.TabIndex = 31;
             this.lblTargetTemperature.Text = "123123";
             // 
-            // label19
+            // lblAccelerationX
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(34, 170);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(13, 15);
-            this.label19.TabIndex = 38;
-            this.label19.Text = "0";
+            this.lblAccelerationX.AutoSize = true;
+            this.lblAccelerationX.Location = new System.Drawing.Point(34, 170);
+            this.lblAccelerationX.Name = "lblAccelerationX";
+            this.lblAccelerationX.Size = new System.Drawing.Size(13, 15);
+            this.lblAccelerationX.TabIndex = 38;
+            this.lblAccelerationX.Text = "0";
             // 
             // btnSetTargetTemperature
             // 
@@ -500,7 +500,7 @@ partial class Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1406, 450);
+            this.ClientSize = new System.Drawing.Size(638, 450);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.StepperMotors);
             this.Controls.Add(this.groupBox1);
@@ -547,7 +547,7 @@ partial class Form1
     private TextBox tbSetTargetTemperature;
     private Label label10;
     private Label lblAccelerometerBalanced;
-    private Label label17;
-    private Label label18;
-    private Label label19;
+    private Label lblAccelerationY;
+    private Label lblAccelerationZ;
+    private Label lblAccelerationX;
 }
