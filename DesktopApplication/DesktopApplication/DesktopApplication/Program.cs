@@ -27,6 +27,7 @@ public static class Program
             "somepassword"
             );
         await mqtt.Subscribe("3dPrinter/1/#");
+        await mqtt.Subscribe("3dprinter/1/#");
         await mqtt.Publish("test", "test2");
         mqtt.RegisterActionMessageReceived(async e =>
         {
