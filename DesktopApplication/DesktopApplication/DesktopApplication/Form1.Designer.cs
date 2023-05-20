@@ -446,7 +446,6 @@ partial class Form1
             this.btnSetTargetTemperature.TabIndex = 29;
             this.btnSetTargetTemperature.Text = "Set target temperature";
             this.btnSetTargetTemperature.UseVisualStyleBackColor = true;
-            this.btnSetTargetTemperature.Click += new System.EventHandler(this.btnSetTargetTemperature_Click);
             // 
             // tbSetTargetTemperature
             // 
@@ -519,7 +518,6 @@ partial class Form1
     #endregion
 
     private GroupBox groupBox2;
-    private Label label2;
     private Label lblLowResinLevel;
     private Label lblResinLevel;
     private GroupBox StepperMotors;
@@ -536,11 +534,8 @@ partial class Form1
     private Label label6;
     private GroupBox groupBox1;
     private Label lblFanStatus;
-    private Label label7;
-    private Label label3;
     private Label lblTemperature;
     private Label lblDoorStatus;
-    private Label label9;
     private Label lblHeaterStatus;
     private Label lblTargetTemperature;
     private Button btnSetTargetTemperature;
