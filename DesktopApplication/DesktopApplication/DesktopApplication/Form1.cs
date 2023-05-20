@@ -2,6 +2,7 @@ namespace PrinterApplication.DesktopApplication;
 
 using PrinterApplication.Mqtt;
 using PrinterApplication.Storage;
+using System;
 
 public partial class Form1 : Form
 {
@@ -10,31 +11,47 @@ public partial class Form1 : Form
     {
         InitializeComponent();
         _provider = provider;
-
-        DoorStorage.OnDoorStateChanged += OnDoorStateChanged;
-        TemperatureStorage.TemperatureChanged += OnTemperatureChanged;
         ResinStorage.ResinReceived += OnResinReceived;
         ResinStorage.ResinLevelLow += OnResinLevelLow;
         ResinStorage.ResinRefilled += OnResinRefilled;
-        HeaterStorage.HeaterStateChanged += OnHeaterStateChanged;
         AccelerometerStorage.OnAccelerometerBalancedStateChanged += OnAccelerometerBalancedStateChanged;
         AccelerometerStorage.OnAccelerometerDataReceived += OnAccelerometerDataReceived;
-        FanStatusStorage.OnFanStatusChanged += OnFanStatusChanged;
+        NozzleStorage.NozzleDataReceived += OnNozzleDataReceived;
+        NozzleStorage.NozzleFanStateChanged += OnNozzleFanStateChanged;
+        NozzleStorage.NozzleExtruderStateChanged += OnNozzleExtruderStateChanged;
+        ChassisEnvironmentStorage.ChassisEnvironmentDataReceived += OnChassisEnvironmentDataReceived;
+        ChassisEnvironmentStorage.ChassisDoorStateChanged += OnChassisDoorStateChanged;
     }
 
-    private void OnFanStatusChanged(object? _, FanStatusChangedEventArgs e)
+    private void OnChassisDoorStateChanged(object? sender, EnvironmentDataReceivedEventArgs e)
     {
-        if (InvokeRequired)
-        {
-            Invoke(new MethodInvoker(() => { OnFanStatusChanged(_, e); }));
-        }
-        lblFanStatus.Text = e.status.IsOn ? "On" : "Off";
-        lblFanStatus.ForeColor = e.status.IsOn ? Color.Black : Color.Red;
+        lblDoorStatus.Text = $"{(e.Environment.DoorIsClosed ? "Yes" : "No")}";
+        lblDoorStatus.ForeColor = e.Environment.DoorIsClosed ? Color.Black : Color.Red;
     }
 
-    private void OnAccelerometerDataReceived(object _, AccelerometerEventArgs e)
+    private void OnChassisEnvironmentDataReceived(object? sender, EnvironmentDataReceivedEventArgs e)
     {
-        //lblAccelerometerBalanced.Text = e.Accelerometer.IsLeveled ? "Leveled" : "Not leveled";
+        lblEnvironmentTemperature.Text = $"{e.Environment.Temperature}C";
+        lblEnvironmentHumidity.Text = $"{e.Environment.RelativeHumidity}%";
+    }
+
+    private void OnNozzleExtruderStateChanged(object? sender, NozzleDataReceivedEventArgs e)
+    {
+        lblNozzleExtruderStatus.Text = $"{(e.Nozzle.ExtruderIsOn ? "On" : "Off")}";
+    }
+
+    private void OnNozzleFanStateChanged(object? sender, NozzleDataReceivedEventArgs e)
+    {
+        lblNozzleFanStatus.Text = $"{(e.Nozzle.FanIsOn ? "On" : "Off")}";
+    }
+
+    private void OnNozzleDataReceived(object? sender, NozzleDataReceivedEventArgs e)
+    {
+        lblNozzleTemperature.Text = $"{e.Nozzle.Temperature}C";
+    }
+
+    private void OnAccelerometerDataReceived(object? _, AccelerometerEventArgs e)
+    {
         if(InvokeRequired)
         {
             Invoke(new MethodInvoker(() => { OnAccelerometerDataReceived(_, e); }));
@@ -44,8 +61,7 @@ public partial class Form1 : Form
         lblAccelerationZ.Text = $" {e.Accelerometer.Z}";
     }
 
-
-    private void OnAccelerometerBalancedStateChanged(object _, AccelerometeBalancedStateChangedEventArgs e)
+    private void OnAccelerometerBalancedStateChanged(object? _, AccelerometeBalancedStateChangedEventArgs e)
     {
         if (InvokeRequired)
         {
@@ -54,28 +70,8 @@ public partial class Form1 : Form
         lblAccelerometerBalanced.Text = e.IsLeveled ? "Yes" : "No";
         lblAccelerometerBalanced.ForeColor = e.IsLeveled ? Color.Black : Color.Red;
     }
-
-    private void OnDoorStateChanged(object _, DoorStateChangedEventArgs e)
-    {
-        if (InvokeRequired)
-        {
-            Invoke(new MethodInvoker(() => { OnDoorStateChanged(_, e); }));
-        }
-        lblDoorStatus.Text = e.IsOpen ? "Open" : "Closed";
-        lblDoorStatus.ForeColor = e.IsOpen ? Color.Red : Color.Black;
-    }
-
-    private void OnTemperatureChanged(object _, TemperatureChangedEventArgs e)
-    {
-        if (InvokeRequired)
-        {
-            Invoke(new MethodInvoker(() => { OnTemperatureChanged(_, e); }));
-            return;
-        }
-        lblTemperature.Text = $"{e.Temperature.Reading}C";
-    }
-
-    private void OnResinReceived(object _, ResinReceivedEventArgs e)
+    
+    private void OnResinReceived(object? _, ResinReceivedEventArgs e)
     {
         if (InvokeRequired)
         {
@@ -85,7 +81,7 @@ public partial class Form1 : Form
         lblResinLevel.Text = $"{e.Resin.Level}%";
     }
 
-    private void OnResinLevelLow(object _, ResinLevelLowEventArgs e)
+    private void OnResinLevelLow(object? _, ResinLevelLowEventArgs e)
     {
         if (InvokeRequired)
         {
@@ -96,7 +92,7 @@ public partial class Form1 : Form
         lblLowResinLevel.ForeColor = Color.Red;
     }
 
-    private void OnResinRefilled(object _, ResinRefilledEventArgs e)
+    private void OnResinRefilled(object? _, ResinRefilledEventArgs e)
     {
         if (InvokeRequired)
         {
@@ -105,23 +101,5 @@ public partial class Form1 : Form
         }
         lblLowResinLevel.Text = e.Resin.IsLow ? "Low" : "Good";
         lblLowResinLevel.ForeColor = e.Resin.IsLow ? Color.Red : Color.Black;
-    }
-
-    private void OnHeaterStateChanged(object _, HeaterStateChangedEventArgs e)
-    {
-        if (InvokeRequired)
-        {
-            Invoke(new MethodInvoker(() => { OnHeaterStateChanged(_, e); }));
-            return;
-        }
-        lblHeaterStatus.Text = e.Heater.IsOn ? "On" : "Off";
-        lblHeaterStatus.ForeColor = e.Heater.IsOn ? Color.Black : Color.Red;
-    }
-
-    private void btnSetTargetTemperature_Click(object sender, EventArgs e)
-    {
-        // TODO: Implement
-        _provider.Publish("3dPrinter/1/temperature/target", tbSetTargetTemperature.Text);
-        lblTargetTemperature.Text = tbSetTargetTemperature.Text;
     }
 }

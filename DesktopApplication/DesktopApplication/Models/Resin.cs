@@ -2,7 +2,7 @@
 
 public class Resin
 {
-    private static double WARNING_LEVEL = 25;
+    private static readonly double WARNING_LEVEL = 25;
     public double Level { get; }
     public bool IsLow { get; }
 

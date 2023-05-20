@@ -2,19 +2,16 @@
 
 public class MotorReading
 {
+    public int MotorId { get; }
     public double X { get; }
     public double Y { get; }
     public double Z { get; }
 
-    public MotorReading(double x, double y, double z)
+    public MotorReading(int motorId, double x, double y, double z)
     {
         X = x;
         Y = y;
         Z = z;
-    }
-
-    public override string ToString()
-    {
-        return $"X: {X}, Y: {Y}, Z: {Z}";
+        MotorId = motorId;
     }
 }
