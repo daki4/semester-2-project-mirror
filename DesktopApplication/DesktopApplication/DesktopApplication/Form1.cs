@@ -2,6 +2,7 @@ namespace PrinterApplication.DesktopApplication;
 
 using PrinterApplication.Mqtt;
 using PrinterApplication.Storage;
+using System;
 
 public partial class Form1 : Form
 {
@@ -15,6 +16,38 @@ public partial class Form1 : Form
         ResinStorage.ResinRefilled += OnResinRefilled;
         AccelerometerStorage.OnAccelerometerBalancedStateChanged += OnAccelerometerBalancedStateChanged;
         AccelerometerStorage.OnAccelerometerDataReceived += OnAccelerometerDataReceived;
+        NozzleStorage.NozzleDataReceived += OnNozzleDataReceived;
+        NozzleStorage.NozzleFanStateChanged += OnNozzleFanStateChanged;
+        NozzleStorage.NozzleExtruderStateChanged += OnNozzleExtruderStateChanged;
+        ChassisEnvironmentStorage.ChassisEnvironmentDataReceived += OnChassisEnvironmentDataReceived;
+        ChassisEnvironmentStorage.ChassisDoorStateChanged += OnChassisDoorStateChanged;
+    }
+
+    private void OnChassisDoorStateChanged(object? sender, EnvironmentDataReceivedEventArgs e)
+    {
+        lblDoorStatus.Text = $"{(e.Environment.DoorIsClosed ? "Yes" : "No")}";
+        lblDoorStatus.ForeColor = e.Environment.DoorIsClosed ? Color.Black : Color.Red;
+    }
+
+    private void OnChassisEnvironmentDataReceived(object? sender, EnvironmentDataReceivedEventArgs e)
+    {
+        lblEnvironmentTemperature.Text = $"{e.Environment.Temperature}C";
+        lblEnvironmentHumidity.Text = $"{e.Environment.RelativeHumidity}%";
+    }
+
+    private void OnNozzleExtruderStateChanged(object? sender, NozzleDataReceivedEventArgs e)
+    {
+        lblNozzleExtruderStatus.Text = $"{(e.Nozzle.ExtruderIsOn ? "On" : "Off")}";
+    }
+
+    private void OnNozzleFanStateChanged(object? sender, NozzleDataReceivedEventArgs e)
+    {
+        lblNozzleFanStatus.Text = $"{(e.Nozzle.FanIsOn ? "On" : "Off")}";
+    }
+
+    private void OnNozzleDataReceived(object? sender, NozzleDataReceivedEventArgs e)
+    {
+        lblNozzleTemperature.Text = $"{e.Nozzle.Temperature}C";
     }
 
     private void OnAccelerometerDataReceived(object? _, AccelerometerEventArgs e)
