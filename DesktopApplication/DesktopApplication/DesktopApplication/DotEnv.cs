@@ -11,15 +11,18 @@ public static class DotEnv
 
         foreach (var line in File.ReadAllLines(filePath))
         {
+            if (line.StartsWith("#"))
+            {
+                continue;
+            }
             var parts = line.Split(
                 '=',
                 StringSplitOptions.RemoveEmptyEntries);
-
-            Log.Debug(string.Join(" ", parts));
             if (parts.Length != 2)
             {
                 continue;
             }
+            Log.Debug(string.Join(" ", parts));
 
             Environment.SetEnvironmentVariable(parts[0], parts[1]);
         }

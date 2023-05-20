@@ -520,6 +520,7 @@ partial class Form1
             this.btnSetTargetNozzleTemperature.TabIndex = 29;
             this.btnSetTargetNozzleTemperature.Text = "Set";
             this.btnSetTargetNozzleTemperature.UseVisualStyleBackColor = true;
+            this.btnSetTargetNozzleTemperature.Click += new System.EventHandler(this.btnSetTargetNozzleTemperature_Click);
             // 
             // tbSetTargetNozzleTemperature
             // 
@@ -589,6 +590,7 @@ partial class Form1
             this.btnResetTargetNozzleTemperature.TabIndex = 32;
             this.btnResetTargetNozzleTemperature.Text = "Reset";
             this.btnResetTargetNozzleTemperature.UseVisualStyleBackColor = true;
+            this.btnResetTargetNozzleTemperature.Click += new System.EventHandler(this.btnResetTargetNozzleTemperature_Click);
             // 
             // Form1
             // 

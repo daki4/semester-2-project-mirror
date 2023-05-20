@@ -13,7 +13,11 @@ public static class ChassisEnvironmentStorage
         _environment.Add(environment);
         _environment.Limit(100);
         ChassisEnvironmentDataReceived?.Invoke(new(), new(environment));
-        if (_environment.SkipLast(1).Last().DoorIsClosed != environment.DoorIsClosed)
+        if (_environment.Count == 1)
+        {
+            ChassisDoorStateChanged?.Invoke(new(), new(environment));
+        }
+        else if (_environment.SkipLast(1).Last().DoorIsClosed != environment.DoorIsClosed)
         {
             ChassisDoorStateChanged?.Invoke(new(), new(environment));
         }

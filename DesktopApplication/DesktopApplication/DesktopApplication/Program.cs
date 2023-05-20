@@ -18,9 +18,10 @@ public static class Program
         ApplicationConfiguration.Initialize();
         Debug.WriteLine(Environment.GetEnvironmentVariable("MQTT_URL"));
         IMqttProvider mqtt = new MqttProvider(
-            Environment.GetEnvironmentVariable("MQTT_URL")!.Trim(),
-            Environment.GetEnvironmentVariable("MQTT_USER")!.Trim(),
-            Environment.GetEnvironmentVariable("MQTT_PASSWORD")!.Trim());
+            (Environment.GetEnvironmentVariable("MQTT_URL") ?? "").Trim(),
+            (Environment.GetEnvironmentVariable("MQTT_USER") ?? "").Trim(),
+            (Environment.GetEnvironmentVariable("MQTT_PASSWORD") ?? "").Trim());
+        //IMqttProvider mqtt = new MqttProvider("broker.hivemq.com", "", "");
         await mqtt.Subscribe("3dPrinter/1/#");
         await mqtt.Subscribe("3dprinter/1/#");
         await mqtt.Publish("test", "test2");

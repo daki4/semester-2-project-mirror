@@ -17,7 +17,11 @@ public static class ResinStorage
         {
             ResinLevelLow?.Invoke(new(), new(resin));
         }
-        if (resin.Level > _resin.SkipLast(1).Last().Level)
+        if (_resin.Count == 1)
+        {
+            ResinRefilled?.Invoke(new(), new(resin));
+        }
+        else if (resin.Level > _resin.SkipLast(1).Last().Level)
         {
             ResinRefilled?.Invoke(new(), new(resin));
         }

@@ -13,6 +13,12 @@ public static class NozzleStorage
         _nozzle.Add(nozzle);
         _nozzle.Limit(100);
         NozzleDataReceived?.Invoke(new(), new(nozzle));
+        if (_nozzle.Count == 1)
+        {
+            NozzleFanStateChanged?.Invoke(new(), new(nozzle));
+            NozzleExtruderStateChanged?.Invoke(new(), new(nozzle));
+            return;
+        }
         if (_nozzle.SkipLast(1).Last().FanIsOn != nozzle.FanIsOn)
         {
             NozzleFanStateChanged?.Invoke(new(), new(nozzle));
