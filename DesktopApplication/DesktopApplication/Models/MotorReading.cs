@@ -2,16 +2,11 @@
 
 public class MotorReading
 {
-    public int MotorId { get; }
-    public double X { get; }
-    public double Y { get; }
-    public double Z { get; }
-
-    public MotorReading(int motorId, double x, double y, double z)
+    public MotorId Id { get; }
+    public double Position { get; }
+    public MotorReading(MotorId motorId, double position)
     {
-        X = x;
-        Y = y;
-        Z = z;
-        MotorId = motorId;
+        Id = motorId;
+        Position = position;
     }
 }

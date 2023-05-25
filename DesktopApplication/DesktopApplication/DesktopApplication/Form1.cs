@@ -3,6 +3,7 @@ namespace PrinterApplication.DesktopApplication;
 using PrinterApplication.Mqtt;
 using PrinterApplication.Storage;
 using System;
+using System.Security.Policy;
 
 public partial class Form1 : Form
 {
@@ -21,6 +22,24 @@ public partial class Form1 : Form
         NozzleStorage.NozzleExtruderStateChanged += OnNozzleExtruderStateChanged;
         ChassisEnvironmentStorage.ChassisEnvironmentDataReceived += OnChassisEnvironmentDataReceived;
         ChassisEnvironmentStorage.ChassisDoorStateChanged += OnChassisDoorStateChanged;
+        MotorStorage.OnMotorXDataReceived += OnMotorXDataReceived;
+        MotorStorage.OnMotorYDataReceived += OnMotorYDataReceived;
+        MotorStorage.OnMotorZDataReceived += OnMotorZDataReceived;
+    }
+
+    private void OnMotorZDataReceived(object? sender, MotorEventArgs e)
+    {
+        gbMotorZ.Name = $"Position Z: {e.Motor.Position}";
+    }
+
+    private void OnMotorYDataReceived(object? sender, MotorEventArgs e)
+    {
+        gbMotorY.Name = $"Position Y: {e.Motor.Position}";
+    }
+
+    private void OnMotorXDataReceived(object? sender, MotorEventArgs e)
+    {
+        gbMotorX.Name = $"Position X: {e.Motor.Position}";
     }
 
     private void OnChassisDoorStateChanged(object? _, EnvironmentDataReceivedEventArgs e)
@@ -77,7 +96,7 @@ public partial class Form1 : Form
 
     private void OnAccelerometerDataReceived(object? _, AccelerometerEventArgs e)
     {
-        if(InvokeRequired)
+        if (InvokeRequired)
         {
             Invoke(new MethodInvoker(() => { OnAccelerometerDataReceived(_, e); }));
             return;
@@ -97,7 +116,7 @@ public partial class Form1 : Form
         lblAccelerometerBalanced.Text = e.IsLeveled ? "Yes" : "No";
         lblAccelerometerBalanced.ForeColor = e.IsLeveled ? Color.Black : Color.Red;
     }
-    
+
     private void OnResinReceived(object? _, ResinReceivedEventArgs e)
     {
         if (InvokeRequired)
@@ -138,9 +157,121 @@ public partial class Form1 : Form
     {
         SetTargetTemperature(double.Parse(tbSetTargetNozzleTemperature.Text));
     }
-    
+
     private void btnResetTargetNozzleTemperature_Click(object sender, EventArgs e)
     {
         SetTargetTemperature(25);
+    }
+
+    private void btnMotorStop_Click(object sender, EventArgs e)
+    {
+        _provider.Publish("3dPrinter/motor/stop/", "1");
+    }
+
+    private void btnMotorGoHome_Click(object sender, EventArgs e)
+    {
+        _provider.Publish("3dPrinter/motor/home/", "1");
+    }
+
+    private void PublishDisable(string motor)
+    {
+        _provider.Publish($"3dPrinter/motor/{motor}/disable/", "1");
+    }
+
+    private void btnMotorXDisable_Click(object sender, EventArgs e)
+    {
+        PublishDisable("x");
+    }
+
+    private void btnMotorYDisable_Click(object sender, EventArgs e)
+    {
+        PublishDisable("y");
+    }
+
+    private void btnMotorZDisable_Click(object sender, EventArgs e)
+    {
+        PublishDisable("z");
+    }
+
+    private void PublishToggle(string motor)
+    {
+        _provider.Publish($"3dPrinter/motor/{motor}/toggle", "1");
+    }
+
+    private void btnMotorXToggle_Click(object sender, EventArgs e)
+    {
+        PublishToggle("x");
+    }
+
+    private void btnMotorYToggle_Click(object sender, EventArgs e)
+    {
+        PublishToggle("y");
+    }
+
+    private void btnMotorZToggle_Click(object sender, EventArgs e)
+    {
+        PublishToggle("z");
+    }
+
+    private void PublishSend(string motor, string key, string value)
+    {
+        _provider.Publish($"3dPrinter/motor/{motor}/{key}", value);
+    }
+
+    private void btnMotorXSend_Click(object sender, EventArgs e)
+    {
+        TextBox[] textBoxes = new[] { tbMotorXSpeed, tbMotorXRelative, tbMotorXAbsHome, tbMotorXAbsEnd, tbMotorXLoop };
+        try
+        {
+            var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
+            PublishSend("x", firstTextBox.Name.Split("X")[1].ToLower(), firstTextBox.Text);
+        }
+        catch (Exception) { }
+        finally
+        {
+            tbMotorXSpeed.Text = "";
+            tbMotorXRelative.Text = "";
+            tbMotorXAbsHome.Text = "";
+            tbMotorXAbsEnd.Text = "";
+            tbMotorXLoop.Text = "";
+        }
+    }
+
+    private void btnMotorYSend_Click(object sender, EventArgs e)
+    {
+        TextBox[] textBoxes = new[] { tbMotorYSpeed, tbMotorYRelative, tbMotorYAbsHome, tbMotorYAbsEnd, tbMotorYLoop };
+        try
+        {
+            var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
+            PublishSend("y", firstTextBox.Name.Split("Y")[1].ToLower(), firstTextBox.Text);
+        }
+        catch (Exception) { }
+        finally
+        {
+            tbMotorYSpeed.Text = "";
+            tbMotorYRelative.Text = "";
+            tbMotorYAbsHome.Text = "";
+            tbMotorYAbsEnd.Text = "";
+            tbMotorYLoop.Text = "";
+        }
+    }
+
+    private void btnMotorZSend_Click(object sender, EventArgs e)
+    {
+        TextBox[] textBoxes = new[] { tbMotorZSpeed, tbMotorZRelative, tbMotorZAbsHome, tbMotorZAbsEnd, tbMotorZLoop };
+        try
+        {
+            var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
+            PublishSend("z", firstTextBox.Name.Split("Z")[1].ToLower(), firstTextBox.Text);
+        }
+        catch (Exception) { }
+        finally
+        {
+            tbMotorZSpeed.Text = "";
+            tbMotorZRelative.Text = "";
+            tbMotorZAbsHome.Text = "";
+            tbMotorZAbsEnd.Text = "";
+            tbMotorZLoop.Text = "";
+        }
     }
 }

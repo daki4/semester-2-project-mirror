@@ -133,7 +133,7 @@ public class MqttProvider : IMqttProvider
     {
         if (_managedMqttClientSubscriber == null)
         {
-            return;
+            throw new InvalidOperationException("MQTT client not initialized");
         }
         _managedMqttClientSubscriber.ApplicationMessageReceivedAsync += action;
     }

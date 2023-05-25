@@ -20,7 +20,9 @@ public static class Dispatcher
                 "3dprinter/1/env" => EnvironmentDispatcher,
                 "3dprinter/1/resin" => ResinDispatcher,
                 "3dprinter/1/accelerometer" => AccelerometerDispatcher,
-                "3dprinter/1/motor" => MotorDispatcher,
+                "3dprinter/1/motor/x/position" => MotorDispatcher,
+                "3dprinter/1/motor/y/position" => MotorDispatcher,
+                "3dprinter/1/motor/z/position" => MotorDispatcher,
                 _ => (m) => Debug.WriteLine("Unknown topic: " + m.Topic)
             };
             toBeCalled(mrea.ApplicationMessage);
@@ -86,8 +88,10 @@ public static class Dispatcher
     #region Motors
     private static void MotorDispatcher(MqttApplicationMessage message)
     {
-        var payload = System.Text.Encoding.UTF8.GetString(message.Payload).Split(";");
-        var position = payload.Select(double.Parse).ToArray();
+        var payload = System.Text.Encoding.UTF8.GetString(message.Payload);
+        var motorId = Enum.Parse<MotorId>(message.Topic.ToLower().Trim('/').Split('/')[3]);
+
+        MotorStorage.Add(new MotorReading(motorId, double.Parse(payload)));
     }
     #endregion
 }
