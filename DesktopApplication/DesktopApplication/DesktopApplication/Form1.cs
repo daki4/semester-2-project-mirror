@@ -3,6 +3,7 @@ namespace PrinterApplication.DesktopApplication;
 using PrinterApplication.Mqtt;
 using PrinterApplication.Storage;
 using System;
+using System.Diagnostics;
 using System.Security.Policy;
 
 public partial class Form1 : Form
@@ -17,6 +18,7 @@ public partial class Form1 : Form
         ResinStorage.ResinRefilled += OnResinRefilled;
         AccelerometerStorage.OnAccelerometerBalancedStateChanged += OnAccelerometerBalancedStateChanged;
         AccelerometerStorage.OnAccelerometerDataReceived += OnAccelerometerDataReceived;
+        BedStorage.BedDataReceived += OnBedDataReceived;
         NozzleStorage.NozzleDataReceived += OnNozzleDataReceived;
         NozzleStorage.NozzleFanStateChanged += OnNozzleFanStateChanged;
         NozzleStorage.NozzleExtruderStateChanged += OnNozzleExtruderStateChanged;
@@ -27,19 +29,50 @@ public partial class Form1 : Form
         MotorStorage.OnMotorZDataReceived += OnMotorZDataReceived;
     }
 
+    private void OnBedDataReceived(object? sender, BedDataReceivedEventArgs e)
+    {
+        if (InvokeRequired)
+        {
+            Invoke(new MethodInvoker(() => { OnBedDataReceived(sender, e); }));
+            return;
+        }
+        lblBedFan.Text = e.Bed.FanIsOn ? "On" : "Off";
+        lblBedFan.ForeColor = e.Bed.FanIsOn ? Color.Black : Color.Red;
+        lblBedHeater.Text = e.Bed.HeaterIsOn ? "On" : "Off";
+        lblBedHeater.ForeColor = e.Bed.FanIsOn ? Color.Black : Color.Red;
+        lblBedTemperature.Text = $"{e.Bed.Temperature}C";
+    }
+
     private void OnMotorZDataReceived(object? sender, MotorEventArgs e)
     {
-        gbMotorZ.Name = $"Position Z: {e.Motor.Position}";
+        if (InvokeRequired)
+        {
+            Invoke(new MethodInvoker(() => { OnMotorZDataReceived(sender, e); }));
+            return;
+        }
+
+        gbMotorZ.Text = $"Position Z: {e.Motor.Position}";
     }
 
     private void OnMotorYDataReceived(object? sender, MotorEventArgs e)
     {
-        gbMotorY.Name = $"Position Y: {e.Motor.Position}";
+        if (InvokeRequired)
+        {
+            Invoke(new MethodInvoker(() => { OnMotorYDataReceived(sender, e); }));
+            return;
+        }
+
+        gbMotorY.Text = $"Position Y: {e.Motor.Position}";
     }
 
     private void OnMotorXDataReceived(object? sender, MotorEventArgs e)
     {
-        gbMotorX.Name = $"Position X: {e.Motor.Position}";
+        if (InvokeRequired)
+        {
+            Invoke(new MethodInvoker(() => { OnMotorXDataReceived(sender, e); }));
+            return;
+        }
+        gbMotorX.Text = $"Position X: {e.Motor.Position}";
     }
 
     private void OnChassisDoorStateChanged(object? _, EnvironmentDataReceivedEventArgs e)
@@ -170,7 +203,7 @@ public partial class Form1 : Form
 
     private void btnMotorGoHome_Click(object sender, EventArgs e)
     {
-        _provider.Publish("3dPrinter/motor/home/", "1");
+        _provider.Publish("3dPrinter/motor/homing/", "1");
     }
 
     private void PublishDisable(string motor)
@@ -220,7 +253,7 @@ public partial class Form1 : Form
 
     private void btnMotorXSend_Click(object sender, EventArgs e)
     {
-        TextBox[] textBoxes = new[] { tbMotorXSpeed, tbMotorXRelative, tbMotorXAbsHome, tbMotorXAbsEnd, tbMotorXLoop };
+        TextBox[] textBoxes = new[] { tbMotorXSpeed, tbMotorXRelative, tbMotorXAbsoluteHome, tbMotorXAbsoluteEnd, tbMotorXLoop };
         try
         {
             var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
@@ -231,15 +264,15 @@ public partial class Form1 : Form
         {
             tbMotorXSpeed.Text = "";
             tbMotorXRelative.Text = "";
-            tbMotorXAbsHome.Text = "";
-            tbMotorXAbsEnd.Text = "";
+            tbMotorXAbsoluteHome.Text = "";
+            tbMotorXAbsoluteEnd.Text = "";
             tbMotorXLoop.Text = "";
         }
     }
 
     private void btnMotorYSend_Click(object sender, EventArgs e)
     {
-        TextBox[] textBoxes = new[] { tbMotorYSpeed, tbMotorYRelative, tbMotorYAbsHome, tbMotorYAbsEnd, tbMotorYLoop };
+        TextBox[] textBoxes = new[] { tbMotorYSpeed, tbMotorYRelative, tbMotorYAbsoluteHome, tbMotorYAbsoluteEnd, tbMotorYLoop };
         try
         {
             var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
@@ -250,15 +283,15 @@ public partial class Form1 : Form
         {
             tbMotorYSpeed.Text = "";
             tbMotorYRelative.Text = "";
-            tbMotorYAbsHome.Text = "";
-            tbMotorYAbsEnd.Text = "";
+            tbMotorYAbsoluteHome.Text = "";
+            tbMotorYAbsoluteEnd.Text = "";
             tbMotorYLoop.Text = "";
         }
     }
 
     private void btnMotorZSend_Click(object sender, EventArgs e)
     {
-        TextBox[] textBoxes = new[] { tbMotorZSpeed, tbMotorZRelative, tbMotorZAbsHome, tbMotorZAbsEnd, tbMotorZLoop };
+        TextBox[] textBoxes = new[] { tbMotorZSpeed, tbMotorZRelative, tbMotorZAbsoluteHome, tbMotorZAbsoluteEnd, tbMotorZLoop };
         try
         {
             var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
@@ -269,8 +302,8 @@ public partial class Form1 : Form
         {
             tbMotorZSpeed.Text = "";
             tbMotorZRelative.Text = "";
-            tbMotorZAbsHome.Text = "";
-            tbMotorZAbsEnd.Text = "";
+            tbMotorZAbsoluteHome.Text = "";
+            tbMotorZAbsoluteEnd.Text = "";
             tbMotorZLoop.Text = "";
         }
     }

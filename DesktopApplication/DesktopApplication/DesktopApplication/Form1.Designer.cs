@@ -43,6 +43,8 @@ partial class Form1
             System.Windows.Forms.Label label17;
             System.Windows.Forms.Label label18;
             System.Windows.Forms.Label label19;
+            System.Windows.Forms.Label label31;
+            System.Windows.Forms.Label label32;
             this.lblLowResinLevel = new System.Windows.Forms.Label();
             this.lblResinLevel = new System.Windows.Forms.Label();
             this.StepperMotors = new System.Windows.Forms.GroupBox();
@@ -53,11 +55,11 @@ partial class Form1
             this.btnMotorZToggle = new System.Windows.Forms.Button();
             this.btnMotorZSend = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
-            this.tbMotorZAbsEnd = new System.Windows.Forms.TextBox();
+            this.tbMotorZAbsoluteEnd = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.tbMotorZRelative = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.tbMotorZAbsHome = new System.Windows.Forms.TextBox();
+            this.tbMotorZAbsoluteHome = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.tbMotorZSpeed = new System.Windows.Forms.TextBox();
             this.gbMotorY = new System.Windows.Forms.GroupBox();
@@ -67,11 +69,11 @@ partial class Form1
             this.btnMotorYToggle = new System.Windows.Forms.Button();
             this.btnMotorYSend = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.tbMotorYAbsEnd = new System.Windows.Forms.TextBox();
+            this.tbMotorYAbsoluteEnd = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tbMotorYRelative = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.tbMotorYAbsHome = new System.Windows.Forms.TextBox();
+            this.tbMotorYAbsoluteHome = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.tbMotorYSpeed = new System.Windows.Forms.TextBox();
             this.btnMotorStop = new System.Windows.Forms.Button();
@@ -83,11 +85,11 @@ partial class Form1
             this.btnMotorXToggle = new System.Windows.Forms.Button();
             this.btnMotorXSend = new System.Windows.Forms.Button();
             this.label26 = new System.Windows.Forms.Label();
-            this.tbMotorXAbsEnd = new System.Windows.Forms.TextBox();
+            this.tbMotorXAbsoluteEnd = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.tbMotorXRelative = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.tbMotorXAbsHome = new System.Windows.Forms.TextBox();
+            this.tbMotorXAbsoluteHome = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.tbMotorXSpeed = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -108,6 +110,8 @@ partial class Form1
             this.lblNozzleFanStatus = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnResetTargetNozzleTemperature = new System.Windows.Forms.Button();
+            this.lblBedFan = new System.Windows.Forms.Label();
+            this.lblBedHeater = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
@@ -123,6 +127,8 @@ partial class Form1
             label17 = new System.Windows.Forms.Label();
             label18 = new System.Windows.Forms.Label();
             label19 = new System.Windows.Forms.Label();
+            label31 = new System.Windows.Forms.Label();
+            label32 = new System.Windows.Forms.Label();
             this.StepperMotors.SuspendLayout();
             this.gbMotorZ.SuspendLayout();
             this.gbMotorY.SuspendLayout();
@@ -198,7 +204,7 @@ partial class Form1
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new System.Drawing.Point(158, 24);
+            label13.Location = new System.Drawing.Point(158, 15);
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(50, 15);
             label13.TabIndex = 33;
@@ -243,7 +249,7 @@ partial class Form1
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new System.Drawing.Point(158, 78);
+            label17.Location = new System.Drawing.Point(158, 98);
             label17.Name = "label17";
             label17.Size = new System.Drawing.Size(76, 15);
             label17.TabIndex = 41;
@@ -310,11 +316,11 @@ partial class Form1
             this.gbMotorZ.Controls.Add(this.btnMotorZToggle);
             this.gbMotorZ.Controls.Add(this.btnMotorZSend);
             this.gbMotorZ.Controls.Add(this.label24);
-            this.gbMotorZ.Controls.Add(this.tbMotorZAbsEnd);
+            this.gbMotorZ.Controls.Add(this.tbMotorZAbsoluteEnd);
             this.gbMotorZ.Controls.Add(this.label28);
             this.gbMotorZ.Controls.Add(this.tbMotorZRelative);
             this.gbMotorZ.Controls.Add(this.label29);
-            this.gbMotorZ.Controls.Add(this.tbMotorZAbsHome);
+            this.gbMotorZ.Controls.Add(this.tbMotorZAbsoluteHome);
             this.gbMotorZ.Controls.Add(this.label30);
             this.gbMotorZ.Controls.Add(this.tbMotorZSpeed);
             this.gbMotorZ.Location = new System.Drawing.Point(488, 20);
@@ -381,12 +387,12 @@ partial class Form1
             this.label24.TabIndex = 34;
             this.label24.Text = "Abs. End:";
             // 
-            // tbMotorZAbsEnd
+            // tbMotorZAbsoluteEnd
             // 
-            this.tbMotorZAbsEnd.Location = new System.Drawing.Point(68, 111);
-            this.tbMotorZAbsEnd.Name = "tbMotorZAbsEnd";
-            this.tbMotorZAbsEnd.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorZAbsEnd.TabIndex = 33;
+            this.tbMotorZAbsoluteEnd.Location = new System.Drawing.Point(68, 111);
+            this.tbMotorZAbsoluteEnd.Name = "tbMotorZAbsoluteEnd";
+            this.tbMotorZAbsoluteEnd.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorZAbsoluteEnd.TabIndex = 33;
             // 
             // label28
             // 
@@ -413,12 +419,12 @@ partial class Form1
             this.label29.TabIndex = 30;
             this.label29.Text = "Abs. Home:";
             // 
-            // tbMotorZAbsHome
+            // tbMotorZAbsoluteHome
             // 
-            this.tbMotorZAbsHome.Location = new System.Drawing.Point(86, 82);
-            this.tbMotorZAbsHome.Name = "tbMotorZAbsHome";
-            this.tbMotorZAbsHome.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorZAbsHome.TabIndex = 29;
+            this.tbMotorZAbsoluteHome.Location = new System.Drawing.Point(86, 82);
+            this.tbMotorZAbsoluteHome.Name = "tbMotorZAbsoluteHome";
+            this.tbMotorZAbsoluteHome.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorZAbsoluteHome.TabIndex = 29;
             // 
             // label30
             // 
@@ -444,11 +450,11 @@ partial class Form1
             this.gbMotorY.Controls.Add(this.btnMotorYToggle);
             this.gbMotorY.Controls.Add(this.btnMotorYSend);
             this.gbMotorY.Controls.Add(this.label5);
-            this.gbMotorY.Controls.Add(this.tbMotorYAbsEnd);
+            this.gbMotorY.Controls.Add(this.tbMotorYAbsoluteEnd);
             this.gbMotorY.Controls.Add(this.label6);
             this.gbMotorY.Controls.Add(this.tbMotorYRelative);
             this.gbMotorY.Controls.Add(this.label10);
-            this.gbMotorY.Controls.Add(this.tbMotorYAbsHome);
+            this.gbMotorY.Controls.Add(this.tbMotorYAbsoluteHome);
             this.gbMotorY.Controls.Add(this.label22);
             this.gbMotorY.Controls.Add(this.tbMotorYSpeed);
             this.gbMotorY.Location = new System.Drawing.Point(247, 20);
@@ -515,12 +521,12 @@ partial class Form1
             this.label5.TabIndex = 34;
             this.label5.Text = "Abs. End:";
             // 
-            // tbMotorYAbsEnd
+            // tbMotorYAbsoluteEnd
             // 
-            this.tbMotorYAbsEnd.Location = new System.Drawing.Point(68, 111);
-            this.tbMotorYAbsEnd.Name = "tbMotorYAbsEnd";
-            this.tbMotorYAbsEnd.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorYAbsEnd.TabIndex = 33;
+            this.tbMotorYAbsoluteEnd.Location = new System.Drawing.Point(68, 111);
+            this.tbMotorYAbsoluteEnd.Name = "tbMotorYAbsoluteEnd";
+            this.tbMotorYAbsoluteEnd.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorYAbsoluteEnd.TabIndex = 33;
             // 
             // label6
             // 
@@ -547,12 +553,12 @@ partial class Form1
             this.label10.TabIndex = 30;
             this.label10.Text = "Abs. Home:";
             // 
-            // tbMotorYAbsHome
+            // tbMotorYAbsoluteHome
             // 
-            this.tbMotorYAbsHome.Location = new System.Drawing.Point(86, 82);
-            this.tbMotorYAbsHome.Name = "tbMotorYAbsHome";
-            this.tbMotorYAbsHome.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorYAbsHome.TabIndex = 29;
+            this.tbMotorYAbsoluteHome.Location = new System.Drawing.Point(86, 82);
+            this.tbMotorYAbsoluteHome.Name = "tbMotorYAbsoluteHome";
+            this.tbMotorYAbsoluteHome.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorYAbsoluteHome.TabIndex = 29;
             // 
             // label22
             // 
@@ -598,11 +604,11 @@ partial class Form1
             this.gbMotorX.Controls.Add(this.btnMotorXToggle);
             this.gbMotorX.Controls.Add(this.btnMotorXSend);
             this.gbMotorX.Controls.Add(this.label26);
-            this.gbMotorX.Controls.Add(this.tbMotorXAbsEnd);
+            this.gbMotorX.Controls.Add(this.tbMotorXAbsoluteEnd);
             this.gbMotorX.Controls.Add(this.label25);
             this.gbMotorX.Controls.Add(this.tbMotorXRelative);
             this.gbMotorX.Controls.Add(this.label21);
-            this.gbMotorX.Controls.Add(this.tbMotorXAbsHome);
+            this.gbMotorX.Controls.Add(this.tbMotorXAbsoluteHome);
             this.gbMotorX.Controls.Add(this.label20);
             this.gbMotorX.Controls.Add(this.tbMotorXSpeed);
             this.gbMotorX.Location = new System.Drawing.Point(6, 20);
@@ -669,12 +675,12 @@ partial class Form1
             this.label26.TabIndex = 34;
             this.label26.Text = "Abs. End:";
             // 
-            // tbMotorXAbsEnd
+            // tbMotorXAbsoluteEnd
             // 
-            this.tbMotorXAbsEnd.Location = new System.Drawing.Point(68, 111);
-            this.tbMotorXAbsEnd.Name = "tbMotorXAbsEnd";
-            this.tbMotorXAbsEnd.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorXAbsEnd.TabIndex = 33;
+            this.tbMotorXAbsoluteEnd.Location = new System.Drawing.Point(68, 111);
+            this.tbMotorXAbsoluteEnd.Name = "tbMotorXAbsoluteEnd";
+            this.tbMotorXAbsoluteEnd.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorXAbsoluteEnd.TabIndex = 33;
             // 
             // label25
             // 
@@ -701,12 +707,12 @@ partial class Form1
             this.label21.TabIndex = 30;
             this.label21.Text = "Abs. Home:";
             // 
-            // tbMotorXAbsHome
+            // tbMotorXAbsoluteHome
             // 
-            this.tbMotorXAbsHome.Location = new System.Drawing.Point(86, 82);
-            this.tbMotorXAbsHome.Name = "tbMotorXAbsHome";
-            this.tbMotorXAbsHome.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorXAbsHome.TabIndex = 29;
+            this.tbMotorXAbsoluteHome.Location = new System.Drawing.Point(86, 82);
+            this.tbMotorXAbsoluteHome.Name = "tbMotorXAbsoluteHome";
+            this.tbMotorXAbsoluteHome.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorXAbsoluteHome.TabIndex = 29;
             // 
             // label20
             // 
@@ -766,19 +772,23 @@ partial class Form1
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(label32);
+            this.groupBox4.Controls.Add(this.lblBedHeater);
+            this.groupBox4.Controls.Add(label31);
             this.groupBox4.Controls.Add(this.lblBedTemperature);
+            this.groupBox4.Controls.Add(this.lblBedFan);
             this.groupBox4.Controls.Add(label17);
-            this.groupBox4.Controls.Add(label13);
-            this.groupBox4.Controls.Add(this.lblAccelerometerBalanced);
             this.groupBox4.Controls.Add(this.lblAccelerationY);
             this.groupBox4.Controls.Add(label14);
             this.groupBox4.Controls.Add(label15);
+            this.groupBox4.Controls.Add(label13);
             this.groupBox4.Controls.Add(label16);
+            this.groupBox4.Controls.Add(this.lblAccelerometerBalanced);
             this.groupBox4.Controls.Add(this.lblAccelerationX);
             this.groupBox4.Controls.Add(this.lblAccelerationZ);
-            this.groupBox4.Location = new System.Drawing.Point(6, 200);
+            this.groupBox4.Location = new System.Drawing.Point(6, 179);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(265, 100);
+            this.groupBox4.Size = new System.Drawing.Size(265, 121);
             this.groupBox4.TabIndex = 41;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Bed";
@@ -786,7 +796,7 @@ partial class Form1
             // lblBedTemperature
             // 
             this.lblBedTemperature.AutoSize = true;
-            this.lblBedTemperature.Location = new System.Drawing.Point(234, 78);
+            this.lblBedTemperature.Location = new System.Drawing.Point(234, 98);
             this.lblBedTemperature.Name = "lblBedTemperature";
             this.lblBedTemperature.Size = new System.Drawing.Size(25, 15);
             this.lblBedTemperature.TabIndex = 42;
@@ -796,7 +806,7 @@ partial class Form1
             // 
             this.lblAccelerometerBalanced.AutoSize = true;
             this.lblAccelerometerBalanced.ForeColor = System.Drawing.Color.Black;
-            this.lblAccelerometerBalanced.Location = new System.Drawing.Point(214, 24);
+            this.lblAccelerometerBalanced.Location = new System.Drawing.Point(214, 15);
             this.lblAccelerometerBalanced.Name = "lblAccelerometerBalanced";
             this.lblAccelerometerBalanced.Size = new System.Drawing.Size(24, 15);
             this.lblAccelerometerBalanced.TabIndex = 34;
@@ -930,6 +940,44 @@ partial class Form1
             this.btnResetTargetNozzleTemperature.UseVisualStyleBackColor = true;
             this.btnResetTargetNozzleTemperature.Click += new System.EventHandler(this.btnResetTargetNozzleTemperature_Click);
             // 
+            // label31
+            // 
+            label31.AutoSize = true;
+            label31.Location = new System.Drawing.Point(158, 35);
+            label31.Name = "label31";
+            label31.Size = new System.Drawing.Size(29, 15);
+            label31.TabIndex = 43;
+            label31.Text = "Fan:";
+            // 
+            // lblBedFan
+            // 
+            this.lblBedFan.AutoSize = true;
+            this.lblBedFan.ForeColor = System.Drawing.Color.Black;
+            this.lblBedFan.Location = new System.Drawing.Point(193, 35);
+            this.lblBedFan.Name = "lblBedFan";
+            this.lblBedFan.Size = new System.Drawing.Size(24, 15);
+            this.lblBedFan.TabIndex = 44;
+            this.lblBedFan.Text = "Yes";
+            // 
+            // label32
+            // 
+            label32.AutoSize = true;
+            label32.Location = new System.Drawing.Point(158, 59);
+            label32.Name = "label32";
+            label32.Size = new System.Drawing.Size(45, 15);
+            label32.TabIndex = 45;
+            label32.Text = "Heater:";
+            // 
+            // lblBedHeater
+            // 
+            this.lblBedHeater.AutoSize = true;
+            this.lblBedHeater.ForeColor = System.Drawing.Color.Black;
+            this.lblBedHeater.Location = new System.Drawing.Point(209, 59);
+            this.lblBedHeater.Name = "lblBedHeater";
+            this.lblBedHeater.Size = new System.Drawing.Size(24, 15);
+            this.lblBedHeater.TabIndex = 46;
+            this.lblBedHeater.Text = "Yes";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -984,11 +1032,11 @@ partial class Form1
     private TextBox tbMotorXSpeed;
     private Label label20;
     private Label label21;
-    private TextBox tbMotorXAbsHome;
+    private TextBox tbMotorXAbsoluteHome;
     private Label label25;
     private TextBox tbMotorXRelative;
     private Label label26;
-    private TextBox tbMotorXAbsEnd;
+    private TextBox tbMotorXAbsoluteEnd;
     private Button btnMotorXSend;
     private Button btnMotorStop;
     private Button btnMotorXToggle;
@@ -1000,11 +1048,11 @@ partial class Form1
     private Button btnMotorZToggle;
     private Button btnMotorZSend;
     private Label label24;
-    private TextBox tbMotorZAbsEnd;
+    private TextBox tbMotorZAbsoluteEnd;
     private Label label28;
     private TextBox tbMotorZRelative;
     private Label label29;
-    private TextBox tbMotorZAbsHome;
+    private TextBox tbMotorZAbsoluteHome;
     private Label label30;
     private TextBox tbMotorZSpeed;
     private GroupBox gbMotorY;
@@ -1013,14 +1061,16 @@ partial class Form1
     private Button btnMotorYToggle;
     private Button btnMotorYSend;
     private Label label5;
-    private TextBox tbMotorYAbsEnd;
+    private TextBox tbMotorYAbsoluteEnd;
     private Label label6;
     private TextBox tbMotorYRelative;
     private Label label10;
-    private TextBox tbMotorYAbsHome;
+    private TextBox tbMotorYAbsoluteHome;
     private Label label22;
     private TextBox tbMotorYSpeed;
     private Button btnMotorZDisable;
     private Button btnMotorYDisable;
     private Button btnMotorXDisable;
+    private Label lblBedHeater;
+    private Label lblBedFan;
 }

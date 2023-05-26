@@ -47,8 +47,8 @@ public static class Dispatcher
         var payload = System.Text.Encoding.UTF8.GetString(message.Payload).Split(';');
         var temperature = double.Parse(payload[0]);
         var fan = bool.Parse(payload[1]);
-        var extruder = bool.Parse(payload[2]);
-        BedStorage.Add(new Bed(temperature, fan, extruder));
+        var heater = bool.Parse(payload[2]);
+        BedStorage.Add(new Bed(temperature, fan, heater));
     }
     #endregion
 
@@ -75,7 +75,7 @@ public static class Dispatcher
     #region Accelerometer
     private static void AccelerometerDispatcher(MqttApplicationMessage message)
     {
-        var payload = System.Text.Encoding.UTF8.GetString(message.Payload).Split(',');
+        var payload = System.Text.Encoding.UTF8.GetString(message.Payload).Split(';');
         var x = double.Parse(payload[0]);
         var y = double.Parse(payload[1]);
         var z = double.Parse(payload[2]);
@@ -89,7 +89,13 @@ public static class Dispatcher
     private static void MotorDispatcher(MqttApplicationMessage message)
     {
         var payload = System.Text.Encoding.UTF8.GetString(message.Payload);
-        var motorId = Enum.Parse<MotorId>(message.Topic.ToLower().Trim('/').Split('/')[3]);
+        var motorId = message.Topic.Trim('/').Split("/")[3].ToLower() switch
+        {
+            "x" => MotorId.X,
+            "y" => MotorId.Y,
+            "z" => MotorId.Z,
+            _ => throw new ArgumentException(message.Topic.Trim('/').Split("/")[3].ToLower())
+        };
 
         MotorStorage.Add(new MotorReading(motorId, double.Parse(payload)));
     }
