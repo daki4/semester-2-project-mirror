@@ -3,6 +3,7 @@ using MQTTnet.Client;
 using MQTTnet.Extensions.ManagedClient;
 using MQTTnet.Packets;
 using MQTTnet.Server;
+using Serilog;
 using System.Diagnostics;
 
 namespace PrinterApplication.Mqtt;
@@ -112,8 +113,7 @@ public class MqttProvider : IMqttProvider
             .WithPayload(message)
             .WithQualityOfServiceLevel(MQTTnet.Protocol.MqttQualityOfServiceLevel.ExactlyOnce)
             .Build();
-        Debug.WriteLine(topic);
-        Debug.WriteLine(message);
+        Log.Information($"Sending to topic: {topic} payload: {message}");
         await _managedMqttClientPublisher.EnqueueAsync(mqttMessage);
     }
 

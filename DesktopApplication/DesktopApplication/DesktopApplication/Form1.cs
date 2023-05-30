@@ -5,6 +5,7 @@ using PrinterApplication.Storage;
 using System;
 using System.Diagnostics;
 using System.Security.Policy;
+using Serilog;
 
 public partial class Form1 : Form
 {
@@ -37,9 +38,7 @@ public partial class Form1 : Form
             return;
         }
         lblBedFan.Text = e.Bed.FanIsOn ? "On" : "Off";
-        lblBedFan.ForeColor = e.Bed.FanIsOn ? Color.Black : Color.Red;
         lblBedHeater.Text = e.Bed.HeaterIsOn ? "On" : "Off";
-        lblBedHeater.ForeColor = e.Bed.FanIsOn ? Color.Black : Color.Red;
         lblBedTemperature.Text = $"{e.Bed.Temperature}C";
     }
 
@@ -82,8 +81,9 @@ public partial class Form1 : Form
             Invoke(new MethodInvoker(() => { OnChassisDoorStateChanged(_, e); }));
             return;
         }
-        lblDoorStatus.Text = $"{(e.Environment.DoorIsClosed ? "Yes" : "No")}";
+        lblDoorStatus.Text = $"{(e.Environment.DoorIsClosed ? "Closed" : "Open")}";
         lblDoorStatus.ForeColor = e.Environment.DoorIsClosed ? Color.Black : Color.Red;
+        Log.Information($"Door is {(e.Environment.DoorIsClosed ? "Closed" : "Open")}");
     }
 
     private void OnChassisEnvironmentDataReceived(object? _, EnvironmentDataReceivedEventArgs e)
@@ -158,6 +158,14 @@ public partial class Form1 : Form
             return;
         }
         lblResinLevel.Text = $"{e.Resin.Level}%";
+        if (e.Resin.IsLow)
+        {
+            Log.Information("Resin level: {Level}%", e.Resin.Level);
+        }
+        else
+        {
+            Log.Information("Resin level: {Level}%", e.Resin.Level);
+        }
     }
 
     private void OnResinLevelLow(object? _, ResinLevelLowEventArgs e)
@@ -184,7 +192,7 @@ public partial class Form1 : Form
     private void SetTargetTemperature(double targetTemperature)
     {
         lblNozzleTargetTemperature.Text = $"{targetTemperature}C";
-        _provider.Publish("3dPrinter/nozzle/temperature/", targetTemperature.ToString());
+        _provider.Publish("3dPrinter/1/nozzle/temperature/target", targetTemperature.ToString());
     }
     private void btnSetTargetNozzleTemperature_Click(object sender, EventArgs e)
     {
@@ -198,17 +206,17 @@ public partial class Form1 : Form
 
     private void btnMotorStop_Click(object sender, EventArgs e)
     {
-        _provider.Publish("3dPrinter/motor/stop/", "1");
+        _provider.Publish("3dPrinter/1/motor/stop", "1");
     }
 
     private void btnMotorGoHome_Click(object sender, EventArgs e)
     {
-        _provider.Publish("3dPrinter/motor/homing/", "1");
+        _provider.Publish("3dPrinter/1/motor/homing", "1");
     }
 
     private void PublishDisable(string motor)
     {
-        _provider.Publish($"3dPrinter/motor/{motor}/disable/", "1");
+        _provider.Publish($"3dPrinter/1/motor/{motor}/disable", "1");
     }
 
     private void btnMotorXDisable_Click(object sender, EventArgs e)
@@ -228,7 +236,7 @@ public partial class Form1 : Form
 
     private void PublishToggle(string motor)
     {
-        _provider.Publish($"3dPrinter/motor/{motor}/toggle", "1");
+        _provider.Publish($"3dPrinter/1/motor/{motor}/loop", "1");
     }
 
     private void btnMotorXToggle_Click(object sender, EventArgs e)
@@ -248,23 +256,26 @@ public partial class Form1 : Form
 
     private void PublishSend(string motor, string key, string value)
     {
-        _provider.Publish($"3dPrinter/motor/{motor}/{key}", value);
+        _provider.Publish($"3dPrinter/1/motor/{motor}/{key}", value);
     }
 
     private void btnMotorXSend_Click(object sender, EventArgs e)
     {
-        TextBox[] textBoxes = new[] { tbMotorXSpeed, tbMotorXRelative, tbMotorXAbsoluteHome, tbMotorXAbsoluteEnd, tbMotorXLoop };
+        TextBox[] textBoxes = new[] { tbMotorXSpeed, tbMotorXRelative, tbMotorXAbsolute, tbMotorXAbsoluteEnd, tbMotorXLoop };
         try
         {
             var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
             PublishSend("x", firstTextBox.Name.Split("X")[1].ToLower(), firstTextBox.Text);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+            Log.Warning("No valid value found to send for motor X");
+        }
         finally
         {
             tbMotorXSpeed.Text = "";
             tbMotorXRelative.Text = "";
-            tbMotorXAbsoluteHome.Text = "";
+            tbMotorXAbsolute.Text = "";
             tbMotorXAbsoluteEnd.Text = "";
             tbMotorXLoop.Text = "";
         }
@@ -272,18 +283,21 @@ public partial class Form1 : Form
 
     private void btnMotorYSend_Click(object sender, EventArgs e)
     {
-        TextBox[] textBoxes = new[] { tbMotorYSpeed, tbMotorYRelative, tbMotorYAbsoluteHome, tbMotorYAbsoluteEnd, tbMotorYLoop };
+        TextBox[] textBoxes = new[] { tbMotorYSpeed, tbMotorYRelative, tbMotorYAbsolute, tbMotorYAbsoluteEnd, tbMotorYLoop };
         try
         {
             var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
             PublishSend("y", firstTextBox.Name.Split("Y")[1].ToLower(), firstTextBox.Text);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+            Log.Warning("No valid value found to send for motor Y");
+        }
         finally
         {
             tbMotorYSpeed.Text = "";
             tbMotorYRelative.Text = "";
-            tbMotorYAbsoluteHome.Text = "";
+            tbMotorYAbsolute.Text = "";
             tbMotorYAbsoluteEnd.Text = "";
             tbMotorYLoop.Text = "";
         }
@@ -291,18 +305,21 @@ public partial class Form1 : Form
 
     private void btnMotorZSend_Click(object sender, EventArgs e)
     {
-        TextBox[] textBoxes = new[] { tbMotorZSpeed, tbMotorZRelative, tbMotorZAbsoluteHome, tbMotorZAbsoluteEnd, tbMotorZLoop };
+        TextBox[] textBoxes = new[] { tbMotorZSpeed, tbMotorZRelative, tbMotorZAbsolute, tbMotorZAbsoluteEnd, tbMotorZLoop };
         try
         {
             var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
             PublishSend("z", firstTextBox.Name.Split("Z")[1].ToLower(), firstTextBox.Text);
         }
-        catch (Exception) { }
+        catch (Exception)
+        {
+            Log.Warning("No valid value found to send for motor Z");
+        }
         finally
         {
             tbMotorZSpeed.Text = "";
             tbMotorZRelative.Text = "";
-            tbMotorZAbsoluteHome.Text = "";
+            tbMotorZAbsolute.Text = "";
             tbMotorZAbsoluteEnd.Text = "";
             tbMotorZLoop.Text = "";
         }

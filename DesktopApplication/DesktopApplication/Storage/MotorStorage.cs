@@ -1,7 +1,7 @@
 ﻿using PrinterApplication.Models;
 
 namespace PrinterApplication.Storage;
-public class MotorStorage
+public static class MotorStorage
 {
     private static readonly List<MotorReading> _motor = new();
     public static IReadOnlyCollection<MotorReading> _motorX = _motor.Where(motor => motor.Id == MotorId.X).ToList().AsReadOnly();

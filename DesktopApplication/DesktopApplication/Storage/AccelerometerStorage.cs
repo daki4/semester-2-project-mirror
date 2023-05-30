@@ -1,8 +1,7 @@
 ﻿using PrinterApplication.Models;
-using System.Security.Cryptography.X509Certificates;
 
 namespace PrinterApplication.Storage;
-public class AccelerometerStorage
+public static class AccelerometerStorage
 {
     private static readonly List<Accelerometer> _accelerometer = new();
     public static event EventHandler<AccelerometerEventArgs>? OnAccelerometerDataReceived;

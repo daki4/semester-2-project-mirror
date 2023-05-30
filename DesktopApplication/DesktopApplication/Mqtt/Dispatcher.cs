@@ -2,6 +2,7 @@
 using MQTTnet.Client;
 using PrinterApplication.Models;
 using PrinterApplication.Storage;
+using Serilog;
 using System.Diagnostics;
 
 namespace PrinterApplication.Mqtt;
@@ -13,6 +14,7 @@ public static class Dispatcher
         Debug.WriteLine(((MqttApplicationMessageReceivedEventArgs)args).ApplicationMessage.Topic.ToLower());
         if (args is MqttApplicationMessageReceivedEventArgs mrea)
         {
+            Log.Information($"Message received on topic: {mrea.ApplicationMessage.Topic} with payload: {mrea.ApplicationMessage.ConvertPayloadToString()}");
             Action<MqttApplicationMessage> toBeCalled = mrea.ApplicationMessage.Topic.ToLower().Trim('/') switch
             {
                 "3dprinter/1/nozzle" => NozzleDispatcher,
@@ -23,9 +25,16 @@ public static class Dispatcher
                 "3dprinter/1/motor/x/position" => MotorDispatcher,
                 "3dprinter/1/motor/y/position" => MotorDispatcher,
                 "3dprinter/1/motor/z/position" => MotorDispatcher,
-                _ => (m) => Debug.WriteLine("Unknown topic: " + m.Topic)
+                _ => (m) => Log.Verbose($"Unknown topic: {m.Topic}")
             };
-            toBeCalled(mrea.ApplicationMessage);
+            try
+            {
+                toBeCalled(mrea.ApplicationMessage);
+            }
+            catch (Exception)
+            {
+                Log.Warning($"Malformed message at topic: {mrea.ApplicationMessage.Topic} with payload: {mrea.ApplicationMessage.ConvertPayloadToString()}");
+            }
         }
     }
 
@@ -68,10 +77,11 @@ public static class Dispatcher
     private static void ResinDispatcher(MqttApplicationMessage message)
     {
         var resinLevel = double.Parse(System.Text.Encoding.UTF8.GetString(message.Payload));
+        Log.Information($"new resin reading: {resinLevel}");
         ResinStorage.Add(new Resin(resinLevel));
     }
     #endregion
-    
+
     #region Accelerometer
     private static void AccelerometerDispatcher(MqttApplicationMessage message)
     {
@@ -80,6 +90,7 @@ public static class Dispatcher
         var y = double.Parse(payload[1]);
         var z = double.Parse(payload[2]);
         var isLeveled = bool.Parse(payload[3]);
+        Log.Information($"New Accelerometer reading: X: {x}, Y: {y}, Z: {z}, isLeveled: {isLeveled}");
         AccelerometerStorage.Add(new Accelerometer(x, y, z, isLeveled));
 
     }
@@ -96,7 +107,7 @@ public static class Dispatcher
             "z" => MotorId.Z,
             _ => throw new ArgumentException(message.Topic.Trim('/').Split("/")[3].ToLower())
         };
-
+        Log.Information($"New Motor reading: {motorId} at {payload}");
         MotorStorage.Add(new MotorReading(motorId, double.Parse(payload)));
     }
     #endregion
