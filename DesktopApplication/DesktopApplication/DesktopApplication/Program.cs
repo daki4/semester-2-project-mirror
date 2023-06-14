@@ -1,6 +1,5 @@
 using PrinterApplication.Mqtt;
 using Serilog;
-using System.Diagnostics;
 
 namespace PrinterApplication.DesktopApplication;
 
@@ -17,7 +16,7 @@ public static class Program
 
         Log.Logger = new LoggerConfiguration()
          .WriteTo.Console()
-         .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Minute)
+         .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
          .CreateLogger();
 
         Log.Information("Starting application");

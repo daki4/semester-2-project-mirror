@@ -63,35 +63,38 @@ partial class Form1
             this.label30 = new System.Windows.Forms.Label();
             this.tbMotorZSpeed = new System.Windows.Forms.TextBox();
             this.gbMotorY = new System.Windows.Forms.GroupBox();
-            this.btnMotorYDisable = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tbMotorYLoop = new System.Windows.Forms.TextBox();
-            this.btnMotorYToggle = new System.Windows.Forms.Button();
-            this.btnMotorYSend = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbMotorYAbsoluteEnd = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbMotorYRelative = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tbMotorYAbsolute = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
+            this.pMotorY = new System.Windows.Forms.Panel();
             this.tbMotorYSpeed = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.tbMotorYLoop = new System.Windows.Forms.TextBox();
+            this.tbMotorYAbsolute = new System.Windows.Forms.TextBox();
+            this.btnMotorYToggle = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnMotorYSend = new System.Windows.Forms.Button();
+            this.tbMotorYRelative = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tbMotorYAbsoluteEnd = new System.Windows.Forms.TextBox();
+            this.btnMotorYDisable = new System.Windows.Forms.Button();
             this.btnMotorStop = new System.Windows.Forms.Button();
             this.btnMotorGoHome = new System.Windows.Forms.Button();
             this.gbMotorX = new System.Windows.Forms.GroupBox();
+            this.btnMotorXEnable = new System.Windows.Forms.Button();
             this.btnMotorXDisable = new System.Windows.Forms.Button();
+            this.pMotorX = new System.Windows.Forms.Panel();
             this.label27 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.tbMotorXLoop = new System.Windows.Forms.TextBox();
+            this.tbMotorXSpeed = new System.Windows.Forms.TextBox();
             this.btnMotorXToggle = new System.Windows.Forms.Button();
+            this.tbMotorXAbsolute = new System.Windows.Forms.TextBox();
             this.btnMotorXSend = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
+            this.tbMotorXRelative = new System.Windows.Forms.TextBox();
             this.tbMotorXAbsoluteEnd = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.tbMotorXRelative = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.tbMotorXAbsolute = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.tbMotorXSpeed = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblEnvironmentHumidity = new System.Windows.Forms.Label();
             this.lblEnvironmentTemperature = new System.Windows.Forms.Label();
@@ -112,6 +115,9 @@ partial class Form1
             this.lblNozzleFanStatus = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnResetTargetNozzleTemperature = new System.Windows.Forms.Button();
+            this.pMotorZ = new System.Windows.Forms.Panel();
+            this.btnMotorYEnable = new System.Windows.Forms.Button();
+            this.btnMotorZEnable = new System.Windows.Forms.Button();
             label2 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label7 = new System.Windows.Forms.Label();
@@ -132,10 +138,13 @@ partial class Form1
             this.StepperMotors.SuspendLayout();
             this.gbMotorZ.SuspendLayout();
             this.gbMotorY.SuspendLayout();
+            this.pMotorY.SuspendLayout();
             this.gbMotorX.SuspendLayout();
+            this.pMotorX.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.pMotorZ.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -328,19 +337,9 @@ partial class Form1
             // 
             // gbMotorZ
             // 
+            this.gbMotorZ.Controls.Add(this.btnMotorZEnable);
+            this.gbMotorZ.Controls.Add(this.pMotorZ);
             this.gbMotorZ.Controls.Add(this.btnMotorZDisable);
-            this.gbMotorZ.Controls.Add(this.label23);
-            this.gbMotorZ.Controls.Add(this.tbMotorZLoop);
-            this.gbMotorZ.Controls.Add(this.btnMotorZToggle);
-            this.gbMotorZ.Controls.Add(this.btnMotorZSend);
-            this.gbMotorZ.Controls.Add(this.label24);
-            this.gbMotorZ.Controls.Add(this.tbMotorZAbsoluteEnd);
-            this.gbMotorZ.Controls.Add(this.label28);
-            this.gbMotorZ.Controls.Add(this.tbMotorZRelative);
-            this.gbMotorZ.Controls.Add(this.label29);
-            this.gbMotorZ.Controls.Add(this.tbMotorZAbsolute);
-            this.gbMotorZ.Controls.Add(this.label30);
-            this.gbMotorZ.Controls.Add(this.tbMotorZSpeed);
             this.gbMotorZ.Location = new System.Drawing.Point(488, 20);
             this.gbMotorZ.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbMotorZ.Name = "gbMotorZ";
@@ -352,7 +351,7 @@ partial class Form1
             // 
             // btnMotorZDisable
             // 
-            this.btnMotorZDisable.Location = new System.Drawing.Point(140, 253);
+            this.btnMotorZDisable.Location = new System.Drawing.Point(154, 240);
             this.btnMotorZDisable.Name = "btnMotorZDisable";
             this.btnMotorZDisable.Size = new System.Drawing.Size(75, 23);
             this.btnMotorZDisable.TabIndex = 41;
@@ -363,7 +362,7 @@ partial class Form1
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(11, 145);
+            this.label23.Location = new System.Drawing.Point(14, 139);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(37, 15);
             this.label23.TabIndex = 38;
@@ -371,14 +370,14 @@ partial class Form1
             // 
             // tbMotorZLoop
             // 
-            this.tbMotorZLoop.Location = new System.Drawing.Point(54, 142);
+            this.tbMotorZLoop.Location = new System.Drawing.Point(57, 136);
             this.tbMotorZLoop.Name = "tbMotorZLoop";
             this.tbMotorZLoop.Size = new System.Drawing.Size(100, 23);
             this.tbMotorZLoop.TabIndex = 37;
             // 
             // btnMotorZToggle
             // 
-            this.btnMotorZToggle.Location = new System.Drawing.Point(140, 220);
+            this.btnMotorZToggle.Location = new System.Drawing.Point(148, 175);
             this.btnMotorZToggle.Name = "btnMotorZToggle";
             this.btnMotorZToggle.Size = new System.Drawing.Size(75, 23);
             this.btnMotorZToggle.TabIndex = 36;
@@ -388,7 +387,7 @@ partial class Form1
             // 
             // btnMotorZSend
             // 
-            this.btnMotorZSend.Location = new System.Drawing.Point(59, 220);
+            this.btnMotorZSend.Location = new System.Drawing.Point(67, 175);
             this.btnMotorZSend.Name = "btnMotorZSend";
             this.btnMotorZSend.Size = new System.Drawing.Size(75, 23);
             this.btnMotorZSend.TabIndex = 35;
@@ -399,7 +398,7 @@ partial class Form1
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(11, 113);
+            this.label24.Location = new System.Drawing.Point(14, 107);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(56, 15);
             this.label24.TabIndex = 34;
@@ -407,7 +406,7 @@ partial class Form1
             // 
             // tbMotorZAbsoluteEnd
             // 
-            this.tbMotorZAbsoluteEnd.Location = new System.Drawing.Point(68, 111);
+            this.tbMotorZAbsoluteEnd.Location = new System.Drawing.Point(71, 105);
             this.tbMotorZAbsoluteEnd.Name = "tbMotorZAbsoluteEnd";
             this.tbMotorZAbsoluteEnd.Size = new System.Drawing.Size(100, 23);
             this.tbMotorZAbsoluteEnd.TabIndex = 33;
@@ -415,7 +414,7 @@ partial class Form1
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(11, 55);
+            this.label28.Location = new System.Drawing.Point(14, 49);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(51, 15);
             this.label28.TabIndex = 32;
@@ -423,7 +422,7 @@ partial class Form1
             // 
             // tbMotorZRelative
             // 
-            this.tbMotorZRelative.Location = new System.Drawing.Point(68, 53);
+            this.tbMotorZRelative.Location = new System.Drawing.Point(71, 47);
             this.tbMotorZRelative.Name = "tbMotorZRelative";
             this.tbMotorZRelative.Size = new System.Drawing.Size(100, 23);
             this.tbMotorZRelative.TabIndex = 31;
@@ -431,7 +430,7 @@ partial class Form1
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(11, 84);
+            this.label29.Location = new System.Drawing.Point(14, 78);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(57, 15);
             this.label29.TabIndex = 30;
@@ -439,7 +438,7 @@ partial class Form1
             // 
             // tbMotorZAbsolute
             // 
-            this.tbMotorZAbsolute.Location = new System.Drawing.Point(68, 82);
+            this.tbMotorZAbsolute.Location = new System.Drawing.Point(71, 76);
             this.tbMotorZAbsolute.Name = "tbMotorZAbsolute";
             this.tbMotorZAbsolute.Size = new System.Drawing.Size(100, 23);
             this.tbMotorZAbsolute.TabIndex = 29;
@@ -447,7 +446,7 @@ partial class Form1
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(11, 26);
+            this.label30.Location = new System.Drawing.Point(14, 20);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(42, 15);
             this.label30.TabIndex = 28;
@@ -455,26 +454,16 @@ partial class Form1
             // 
             // tbMotorZSpeed
             // 
-            this.tbMotorZSpeed.Location = new System.Drawing.Point(59, 24);
+            this.tbMotorZSpeed.Location = new System.Drawing.Point(62, 18);
             this.tbMotorZSpeed.Name = "tbMotorZSpeed";
             this.tbMotorZSpeed.Size = new System.Drawing.Size(100, 23);
             this.tbMotorZSpeed.TabIndex = 27;
             // 
             // gbMotorY
             // 
+            this.gbMotorY.Controls.Add(this.btnMotorYEnable);
+            this.gbMotorY.Controls.Add(this.pMotorY);
             this.gbMotorY.Controls.Add(this.btnMotorYDisable);
-            this.gbMotorY.Controls.Add(this.label4);
-            this.gbMotorY.Controls.Add(this.tbMotorYLoop);
-            this.gbMotorY.Controls.Add(this.btnMotorYToggle);
-            this.gbMotorY.Controls.Add(this.btnMotorYSend);
-            this.gbMotorY.Controls.Add(this.label5);
-            this.gbMotorY.Controls.Add(this.tbMotorYAbsoluteEnd);
-            this.gbMotorY.Controls.Add(this.label6);
-            this.gbMotorY.Controls.Add(this.tbMotorYRelative);
-            this.gbMotorY.Controls.Add(this.label10);
-            this.gbMotorY.Controls.Add(this.tbMotorYAbsolute);
-            this.gbMotorY.Controls.Add(this.label22);
-            this.gbMotorY.Controls.Add(this.tbMotorYSpeed);
             this.gbMotorY.Location = new System.Drawing.Point(247, 20);
             this.gbMotorY.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbMotorY.Name = "gbMotorY";
@@ -484,35 +473,67 @@ partial class Form1
             this.gbMotorY.TabStop = false;
             this.gbMotorY.Text = "Position Y";
             // 
-            // btnMotorYDisable
+            // pMotorY
             // 
-            this.btnMotorYDisable.Location = new System.Drawing.Point(140, 254);
-            this.btnMotorYDisable.Name = "btnMotorYDisable";
-            this.btnMotorYDisable.Size = new System.Drawing.Size(75, 23);
-            this.btnMotorYDisable.TabIndex = 40;
-            this.btnMotorYDisable.Text = "Disable";
-            this.btnMotorYDisable.UseVisualStyleBackColor = true;
-            this.btnMotorYDisable.Click += new System.EventHandler(this.btnMotorYDisable_Click);
+            this.pMotorY.Controls.Add(this.tbMotorYSpeed);
+            this.pMotorY.Controls.Add(this.label4);
+            this.pMotorY.Controls.Add(this.label22);
+            this.pMotorY.Controls.Add(this.tbMotorYLoop);
+            this.pMotorY.Controls.Add(this.tbMotorYAbsolute);
+            this.pMotorY.Controls.Add(this.btnMotorYToggle);
+            this.pMotorY.Controls.Add(this.label10);
+            this.pMotorY.Controls.Add(this.btnMotorYSend);
+            this.pMotorY.Controls.Add(this.tbMotorYRelative);
+            this.pMotorY.Controls.Add(this.label5);
+            this.pMotorY.Controls.Add(this.label6);
+            this.pMotorY.Controls.Add(this.tbMotorYAbsoluteEnd);
+            this.pMotorY.Location = new System.Drawing.Point(15, 28);
+            this.pMotorY.Name = "pMotorY";
+            this.pMotorY.Size = new System.Drawing.Size(214, 205);
+            this.pMotorY.TabIndex = 39;
+            // 
+            // tbMotorYSpeed
+            // 
+            this.tbMotorYSpeed.Location = new System.Drawing.Point(64, 12);
+            this.tbMotorYSpeed.Name = "tbMotorYSpeed";
+            this.tbMotorYSpeed.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorYSpeed.TabIndex = 27;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 145);
+            this.label4.Location = new System.Drawing.Point(16, 133);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(37, 15);
             this.label4.TabIndex = 38;
             this.label4.Text = "Loop:";
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(16, 14);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(42, 15);
+            this.label22.TabIndex = 28;
+            this.label22.Text = "Speed:";
+            // 
             // tbMotorYLoop
             // 
-            this.tbMotorYLoop.Location = new System.Drawing.Point(54, 142);
+            this.tbMotorYLoop.Location = new System.Drawing.Point(59, 130);
             this.tbMotorYLoop.Name = "tbMotorYLoop";
             this.tbMotorYLoop.Size = new System.Drawing.Size(100, 23);
             this.tbMotorYLoop.TabIndex = 37;
             // 
+            // tbMotorYAbsolute
+            // 
+            this.tbMotorYAbsolute.Location = new System.Drawing.Point(73, 70);
+            this.tbMotorYAbsolute.Name = "tbMotorYAbsolute";
+            this.tbMotorYAbsolute.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorYAbsolute.TabIndex = 29;
+            // 
             // btnMotorYToggle
             // 
-            this.btnMotorYToggle.Location = new System.Drawing.Point(140, 220);
+            this.btnMotorYToggle.Location = new System.Drawing.Point(136, 175);
             this.btnMotorYToggle.Name = "btnMotorYToggle";
             this.btnMotorYToggle.Size = new System.Drawing.Size(75, 23);
             this.btnMotorYToggle.TabIndex = 36;
@@ -520,9 +541,18 @@ partial class Form1
             this.btnMotorYToggle.UseVisualStyleBackColor = true;
             this.btnMotorYToggle.Click += new System.EventHandler(this.btnMotorYToggle_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(16, 72);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(57, 15);
+            this.label10.TabIndex = 30;
+            this.label10.Text = "Absolute:";
+            // 
             // btnMotorYSend
             // 
-            this.btnMotorYSend.Location = new System.Drawing.Point(59, 220);
+            this.btnMotorYSend.Location = new System.Drawing.Point(56, 175);
             this.btnMotorYSend.Name = "btnMotorYSend";
             this.btnMotorYSend.Size = new System.Drawing.Size(75, 23);
             this.btnMotorYSend.TabIndex = 35;
@@ -530,69 +560,47 @@ partial class Form1
             this.btnMotorYSend.UseVisualStyleBackColor = true;
             this.btnMotorYSend.Click += new System.EventHandler(this.btnMotorYSend_Click);
             // 
+            // tbMotorYRelative
+            // 
+            this.tbMotorYRelative.Location = new System.Drawing.Point(73, 41);
+            this.tbMotorYRelative.Name = "tbMotorYRelative";
+            this.tbMotorYRelative.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorYRelative.TabIndex = 31;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 113);
+            this.label5.Location = new System.Drawing.Point(16, 101);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(56, 15);
             this.label5.TabIndex = 34;
             this.label5.Text = "Abs. End:";
             // 
-            // tbMotorYAbsoluteEnd
-            // 
-            this.tbMotorYAbsoluteEnd.Location = new System.Drawing.Point(68, 111);
-            this.tbMotorYAbsoluteEnd.Name = "tbMotorYAbsoluteEnd";
-            this.tbMotorYAbsoluteEnd.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorYAbsoluteEnd.TabIndex = 33;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 55);
+            this.label6.Location = new System.Drawing.Point(16, 43);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 15);
             this.label6.TabIndex = 32;
             this.label6.Text = "Relative:";
             // 
-            // tbMotorYRelative
+            // tbMotorYAbsoluteEnd
             // 
-            this.tbMotorYRelative.Location = new System.Drawing.Point(68, 53);
-            this.tbMotorYRelative.Name = "tbMotorYRelative";
-            this.tbMotorYRelative.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorYRelative.TabIndex = 31;
+            this.tbMotorYAbsoluteEnd.Location = new System.Drawing.Point(73, 99);
+            this.tbMotorYAbsoluteEnd.Name = "tbMotorYAbsoluteEnd";
+            this.tbMotorYAbsoluteEnd.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorYAbsoluteEnd.TabIndex = 33;
             // 
-            // label10
+            // btnMotorYDisable
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(11, 84);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(57, 15);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "Absolute:";
-            // 
-            // tbMotorYAbsolute
-            // 
-            this.tbMotorYAbsolute.Location = new System.Drawing.Point(68, 82);
-            this.tbMotorYAbsolute.Name = "tbMotorYAbsolute";
-            this.tbMotorYAbsolute.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorYAbsolute.TabIndex = 29;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(11, 26);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(42, 15);
-            this.label22.TabIndex = 28;
-            this.label22.Text = "Speed:";
-            // 
-            // tbMotorYSpeed
-            // 
-            this.tbMotorYSpeed.Location = new System.Drawing.Point(59, 24);
-            this.tbMotorYSpeed.Name = "tbMotorYSpeed";
-            this.tbMotorYSpeed.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorYSpeed.TabIndex = 27;
+            this.btnMotorYDisable.Location = new System.Drawing.Point(151, 239);
+            this.btnMotorYDisable.Name = "btnMotorYDisable";
+            this.btnMotorYDisable.Size = new System.Drawing.Size(75, 23);
+            this.btnMotorYDisable.TabIndex = 40;
+            this.btnMotorYDisable.Text = "Disable";
+            this.btnMotorYDisable.UseVisualStyleBackColor = true;
+            this.btnMotorYDisable.Click += new System.EventHandler(this.btnMotorYDisable_Click);
             // 
             // btnMotorStop
             // 
@@ -616,19 +624,9 @@ partial class Form1
             // 
             // gbMotorX
             // 
+            this.gbMotorX.Controls.Add(this.btnMotorXEnable);
             this.gbMotorX.Controls.Add(this.btnMotorXDisable);
-            this.gbMotorX.Controls.Add(this.label27);
-            this.gbMotorX.Controls.Add(this.tbMotorXLoop);
-            this.gbMotorX.Controls.Add(this.btnMotorXToggle);
-            this.gbMotorX.Controls.Add(this.btnMotorXSend);
-            this.gbMotorX.Controls.Add(this.label26);
-            this.gbMotorX.Controls.Add(this.tbMotorXAbsoluteEnd);
-            this.gbMotorX.Controls.Add(this.label25);
-            this.gbMotorX.Controls.Add(this.tbMotorXRelative);
-            this.gbMotorX.Controls.Add(this.label21);
-            this.gbMotorX.Controls.Add(this.tbMotorXAbsolute);
-            this.gbMotorX.Controls.Add(this.label20);
-            this.gbMotorX.Controls.Add(this.tbMotorXSpeed);
+            this.gbMotorX.Controls.Add(this.pMotorX);
             this.gbMotorX.Location = new System.Drawing.Point(6, 20);
             this.gbMotorX.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbMotorX.Name = "gbMotorX";
@@ -638,9 +636,19 @@ partial class Form1
             this.gbMotorX.TabStop = false;
             this.gbMotorX.Text = "Position X";
             // 
+            // btnMotorXEnable
+            // 
+            this.btnMotorXEnable.Location = new System.Drawing.Point(51, 239);
+            this.btnMotorXEnable.Name = "btnMotorXEnable";
+            this.btnMotorXEnable.Size = new System.Drawing.Size(75, 23);
+            this.btnMotorXEnable.TabIndex = 40;
+            this.btnMotorXEnable.Text = "Enable";
+            this.btnMotorXEnable.UseVisualStyleBackColor = true;
+            this.btnMotorXEnable.Click += new System.EventHandler(this.btnMotorXEnable_Click);
+            // 
             // btnMotorXDisable
             // 
-            this.btnMotorXDisable.Location = new System.Drawing.Point(140, 254);
+            this.btnMotorXDisable.Location = new System.Drawing.Point(132, 240);
             this.btnMotorXDisable.Name = "btnMotorXDisable";
             this.btnMotorXDisable.Size = new System.Drawing.Size(75, 23);
             this.btnMotorXDisable.TabIndex = 39;
@@ -648,25 +656,60 @@ partial class Form1
             this.btnMotorXDisable.UseVisualStyleBackColor = true;
             this.btnMotorXDisable.Click += new System.EventHandler(this.btnMotorXDisable_Click);
             // 
+            // pMotorX
+            // 
+            this.pMotorX.Controls.Add(this.label27);
+            this.pMotorX.Controls.Add(this.label20);
+            this.pMotorX.Controls.Add(this.tbMotorXLoop);
+            this.pMotorX.Controls.Add(this.tbMotorXSpeed);
+            this.pMotorX.Controls.Add(this.btnMotorXToggle);
+            this.pMotorX.Controls.Add(this.tbMotorXAbsolute);
+            this.pMotorX.Controls.Add(this.btnMotorXSend);
+            this.pMotorX.Controls.Add(this.label21);
+            this.pMotorX.Controls.Add(this.label26);
+            this.pMotorX.Controls.Add(this.tbMotorXRelative);
+            this.pMotorX.Controls.Add(this.tbMotorXAbsoluteEnd);
+            this.pMotorX.Controls.Add(this.label25);
+            this.pMotorX.Location = new System.Drawing.Point(10, 28);
+            this.pMotorX.Name = "pMotorX";
+            this.pMotorX.Size = new System.Drawing.Size(219, 205);
+            this.pMotorX.TabIndex = 39;
+            // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(12, 146);
+            this.label27.Location = new System.Drawing.Point(4, 135);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(37, 15);
             this.label27.TabIndex = 38;
             this.label27.Text = "Loop:";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(3, 16);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(42, 15);
+            this.label20.TabIndex = 28;
+            this.label20.Text = "Speed:";
+            // 
             // tbMotorXLoop
             // 
-            this.tbMotorXLoop.Location = new System.Drawing.Point(54, 142);
+            this.tbMotorXLoop.Location = new System.Drawing.Point(46, 131);
             this.tbMotorXLoop.Name = "tbMotorXLoop";
             this.tbMotorXLoop.Size = new System.Drawing.Size(100, 23);
             this.tbMotorXLoop.TabIndex = 37;
             // 
+            // tbMotorXSpeed
+            // 
+            this.tbMotorXSpeed.Location = new System.Drawing.Point(51, 13);
+            this.tbMotorXSpeed.Name = "tbMotorXSpeed";
+            this.tbMotorXSpeed.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorXSpeed.TabIndex = 27;
+            // 
             // btnMotorXToggle
             // 
-            this.btnMotorXToggle.Location = new System.Drawing.Point(140, 220);
+            this.btnMotorXToggle.Location = new System.Drawing.Point(122, 171);
             this.btnMotorXToggle.Name = "btnMotorXToggle";
             this.btnMotorXToggle.Size = new System.Drawing.Size(75, 23);
             this.btnMotorXToggle.TabIndex = 36;
@@ -674,9 +717,16 @@ partial class Form1
             this.btnMotorXToggle.UseVisualStyleBackColor = true;
             this.btnMotorXToggle.Click += new System.EventHandler(this.btnMotorXToggle_Click);
             // 
+            // tbMotorXAbsolute
+            // 
+            this.tbMotorXAbsolute.Location = new System.Drawing.Point(60, 70);
+            this.tbMotorXAbsolute.Name = "tbMotorXAbsolute";
+            this.tbMotorXAbsolute.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorXAbsolute.TabIndex = 29;
+            // 
             // btnMotorXSend
             // 
-            this.btnMotorXSend.Location = new System.Drawing.Point(59, 220);
+            this.btnMotorXSend.Location = new System.Drawing.Point(41, 171);
             this.btnMotorXSend.Name = "btnMotorXSend";
             this.btnMotorXSend.Size = new System.Drawing.Size(75, 23);
             this.btnMotorXSend.TabIndex = 35;
@@ -684,18 +734,34 @@ partial class Form1
             this.btnMotorXSend.UseVisualStyleBackColor = true;
             this.btnMotorXSend.Click += new System.EventHandler(this.btnMotorXSend_Click);
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(3, 74);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(57, 15);
+            this.label21.TabIndex = 30;
+            this.label21.Text = "Absolute:";
+            // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(11, 114);
+            this.label26.Location = new System.Drawing.Point(3, 103);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(56, 15);
             this.label26.TabIndex = 34;
             this.label26.Text = "Abs. End:";
             // 
+            // tbMotorXRelative
+            // 
+            this.tbMotorXRelative.Location = new System.Drawing.Point(60, 42);
+            this.tbMotorXRelative.Name = "tbMotorXRelative";
+            this.tbMotorXRelative.Size = new System.Drawing.Size(100, 23);
+            this.tbMotorXRelative.TabIndex = 31;
+            // 
             // tbMotorXAbsoluteEnd
             // 
-            this.tbMotorXAbsoluteEnd.Location = new System.Drawing.Point(68, 111);
+            this.tbMotorXAbsoluteEnd.Location = new System.Drawing.Point(60, 100);
             this.tbMotorXAbsoluteEnd.Name = "tbMotorXAbsoluteEnd";
             this.tbMotorXAbsoluteEnd.Size = new System.Drawing.Size(100, 23);
             this.tbMotorXAbsoluteEnd.TabIndex = 33;
@@ -703,50 +769,11 @@ partial class Form1
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(11, 56);
+            this.label25.Location = new System.Drawing.Point(3, 45);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(51, 15);
             this.label25.TabIndex = 32;
             this.label25.Text = "Relative:";
-            // 
-            // tbMotorXRelative
-            // 
-            this.tbMotorXRelative.Location = new System.Drawing.Point(68, 53);
-            this.tbMotorXRelative.Name = "tbMotorXRelative";
-            this.tbMotorXRelative.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorXRelative.TabIndex = 31;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(11, 85);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(57, 15);
-            this.label21.TabIndex = 30;
-            this.label21.Text = "Absolute:";
-            // 
-            // tbMotorXAbsolute
-            // 
-            this.tbMotorXAbsolute.Location = new System.Drawing.Point(68, 81);
-            this.tbMotorXAbsolute.Name = "tbMotorXAbsolute";
-            this.tbMotorXAbsolute.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorXAbsolute.TabIndex = 29;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(11, 27);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(42, 15);
-            this.label20.TabIndex = 28;
-            this.label20.Text = "Speed:";
-            // 
-            // tbMotorXSpeed
-            // 
-            this.tbMotorXSpeed.Location = new System.Drawing.Point(59, 24);
-            this.tbMotorXSpeed.Name = "tbMotorXSpeed";
-            this.tbMotorXSpeed.Size = new System.Drawing.Size(100, 23);
-            this.tbMotorXSpeed.TabIndex = 27;
             // 
             // groupBox1
             // 
@@ -826,9 +853,9 @@ partial class Form1
             this.lblBedTemperature.AutoSize = true;
             this.lblBedTemperature.Location = new System.Drawing.Point(234, 98);
             this.lblBedTemperature.Name = "lblBedTemperature";
-            this.lblBedTemperature.Size = new System.Drawing.Size(25, 15);
+            this.lblBedTemperature.Size = new System.Drawing.Size(13, 15);
             this.lblBedTemperature.TabIndex = 42;
-            this.lblBedTemperature.Text = "123";
+            this.lblBedTemperature.Text = "0";
             // 
             // lblBedFan
             // 
@@ -893,9 +920,9 @@ partial class Form1
             this.lblNozzleTargetTemperature.ForeColor = System.Drawing.Color.Black;
             this.lblNozzleTargetTemperature.Location = new System.Drawing.Point(54, 54);
             this.lblNozzleTargetTemperature.Name = "lblNozzleTargetTemperature";
-            this.lblNozzleTargetTemperature.Size = new System.Drawing.Size(13, 15);
+            this.lblNozzleTargetTemperature.Size = new System.Drawing.Size(27, 15);
             this.lblNozzleTargetTemperature.TabIndex = 31;
-            this.lblNozzleTargetTemperature.Text = "0";
+            this.lblNozzleTargetTemperature.Text = "25C";
             // 
             // btnSetTargetNozzleTemperature
             // 
@@ -978,6 +1005,45 @@ partial class Form1
             this.btnResetTargetNozzleTemperature.UseVisualStyleBackColor = true;
             this.btnResetTargetNozzleTemperature.Click += new System.EventHandler(this.btnResetTargetNozzleTemperature_Click);
             // 
+            // pMotorZ
+            // 
+            this.pMotorZ.Controls.Add(this.tbMotorZSpeed);
+            this.pMotorZ.Controls.Add(this.label23);
+            this.pMotorZ.Controls.Add(this.label30);
+            this.pMotorZ.Controls.Add(this.tbMotorZLoop);
+            this.pMotorZ.Controls.Add(this.tbMotorZAbsolute);
+            this.pMotorZ.Controls.Add(this.btnMotorZToggle);
+            this.pMotorZ.Controls.Add(this.label29);
+            this.pMotorZ.Controls.Add(this.btnMotorZSend);
+            this.pMotorZ.Controls.Add(this.tbMotorZRelative);
+            this.pMotorZ.Controls.Add(this.label24);
+            this.pMotorZ.Controls.Add(this.label28);
+            this.pMotorZ.Controls.Add(this.tbMotorZAbsoluteEnd);
+            this.pMotorZ.Location = new System.Drawing.Point(6, 28);
+            this.pMotorZ.Name = "pMotorZ";
+            this.pMotorZ.Size = new System.Drawing.Size(229, 205);
+            this.pMotorZ.TabIndex = 39;
+            // 
+            // btnMotorYEnable
+            // 
+            this.btnMotorYEnable.Location = new System.Drawing.Point(71, 239);
+            this.btnMotorYEnable.Name = "btnMotorYEnable";
+            this.btnMotorYEnable.Size = new System.Drawing.Size(75, 23);
+            this.btnMotorYEnable.TabIndex = 41;
+            this.btnMotorYEnable.Text = "Enable";
+            this.btnMotorYEnable.UseVisualStyleBackColor = true;
+            this.btnMotorYEnable.Click += new System.EventHandler(this.btnMotorYEnable_Click);
+            // 
+            // btnMotorZEnable
+            // 
+            this.btnMotorZEnable.Location = new System.Drawing.Point(73, 240);
+            this.btnMotorZEnable.Name = "btnMotorZEnable";
+            this.btnMotorZEnable.Size = new System.Drawing.Size(75, 23);
+            this.btnMotorZEnable.TabIndex = 42;
+            this.btnMotorZEnable.Text = "Enable";
+            this.btnMotorZEnable.UseVisualStyleBackColor = true;
+            this.btnMotorZEnable.Click += new System.EventHandler(this.btnMotorZEnable_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -990,17 +1056,20 @@ partial class Form1
             this.Text = "Form1";
             this.StepperMotors.ResumeLayout(false);
             this.gbMotorZ.ResumeLayout(false);
-            this.gbMotorZ.PerformLayout();
             this.gbMotorY.ResumeLayout(false);
-            this.gbMotorY.PerformLayout();
+            this.pMotorY.ResumeLayout(false);
+            this.pMotorY.PerformLayout();
             this.gbMotorX.ResumeLayout(false);
-            this.gbMotorX.PerformLayout();
+            this.pMotorX.ResumeLayout(false);
+            this.pMotorX.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.pMotorZ.ResumeLayout(false);
+            this.pMotorZ.PerformLayout();
             this.ResumeLayout(false);
 
     }
@@ -1073,4 +1142,10 @@ partial class Form1
     private Button btnMotorXDisable;
     private Label lblBedHeater;
     private Label lblBedFan;
+    private Button btnMotorXEnable;
+    private Panel pMotorY;
+    private Panel pMotorX;
+    private Button btnMotorZEnable;
+    private Panel pMotorZ;
+    private Button btnMotorYEnable;
 }

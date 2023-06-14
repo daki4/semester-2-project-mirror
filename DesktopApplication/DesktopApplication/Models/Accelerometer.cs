@@ -14,9 +14,4 @@ public class Accelerometer
         Z = z;
         IsLeveled = isLeveled;
     }
-
-    public override string ToString()
-    {
-        return $"X: {X}, Y: {Y}, Z: {Z}, Is leveled: {IsLeveled}";
-    }
 }

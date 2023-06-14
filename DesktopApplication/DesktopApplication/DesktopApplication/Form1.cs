@@ -137,6 +137,9 @@ public partial class Form1 : Form
         lblAccelerationX.Text = $" {e.Accelerometer.X}";
         lblAccelerationY.Text = $" {e.Accelerometer.Y}";
         lblAccelerationZ.Text = $" {e.Accelerometer.Z}";
+        lblAccelerometerBalanced.Text = e.Accelerometer.IsLeveled ? "No" : "Yes";
+        lblAccelerometerBalanced.ForeColor = e.Accelerometer.IsLeveled ? Color.Red : Color.Black;
+
     }
 
     private void OnAccelerometerBalancedStateChanged(object? _, AccelerometeBalancedStateChangedEventArgs e)
@@ -206,34 +209,61 @@ public partial class Form1 : Form
 
     private void btnMotorStop_Click(object sender, EventArgs e)
     {
-        _provider.Publish("3dPrinter/1/motor/stop", "1");
+        _provider.Publish("3dPrinter/1/motor/stop", "stop");
     }
 
     private void btnMotorGoHome_Click(object sender, EventArgs e)
     {
-        _provider.Publish("3dPrinter/1/motor/homing", "1");
+        _provider.Publish("3dPrinter/1/motor/homing", "GoHome");
+        //_provider.Publish("3dPrinter/1/motor/homing", "GoHome");
+        //_provider.Publish("3dPrinter/1/motor/homing", "GoHome");
     }
 
     private void PublishDisable(string motor)
     {
-        _provider.Publish($"3dPrinter/1/motor/{motor}/disable", "1");
+        _provider.Publish($"3dPrinter/1/motor/{motor}/disable", "true");
+    }
+
+    private void PublishEnable(string motor)
+    {
+        _provider.Publish($"3dPrinter/1/motor/{motor}/disable", "false");
+
     }
 
     private void btnMotorXDisable_Click(object sender, EventArgs e)
     {
+        pMotorX.Enabled = false;
         PublishDisable("x");
     }
 
     private void btnMotorYDisable_Click(object sender, EventArgs e)
     {
+        pMotorY.Enabled = false;
         PublishDisable("y");
     }
 
     private void btnMotorZDisable_Click(object sender, EventArgs e)
     {
+        pMotorZ.Enabled = false;
         PublishDisable("z");
     }
 
+    private void btnMotorXEnable_Click(object sender, EventArgs e)
+    {
+        pMotorX.Enabled = true;
+        PublishEnable("x");
+    }
+    private void btnMotorYEnable_Click(object sender, EventArgs e)
+    {
+        pMotorY.Enabled = true;
+        PublishEnable("y");
+    }
+
+    private void btnMotorZEnable_Click(object sender, EventArgs e)
+    {
+        pMotorZ.Enabled = true;
+        PublishEnable("z");
+    }
     private void PublishToggle(string motor)
     {
         _provider.Publish($"3dPrinter/1/motor/{motor}/loop", "1");
