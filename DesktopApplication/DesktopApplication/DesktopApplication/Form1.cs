@@ -137,8 +137,8 @@ public partial class Form1 : Form
         lblAccelerationX.Text = $" {e.Accelerometer.X}";
         lblAccelerationY.Text = $" {e.Accelerometer.Y}";
         lblAccelerationZ.Text = $" {e.Accelerometer.Z}";
-        lblAccelerometerBalanced.Text = e.Accelerometer.IsLeveled ? "No" : "Yes";
-        lblAccelerometerBalanced.ForeColor = e.Accelerometer.IsLeveled ? Color.Red : Color.Black;
+        lblAccelerometerBalanced.Text = e.Accelerometer.IsLeveled ? "Yes" : "No";
+        lblAccelerometerBalanced.ForeColor = e.Accelerometer.IsLeveled ? Color.Black : Color.Red;
 
     }
 
@@ -291,7 +291,7 @@ public partial class Form1 : Form
 
     private void btnMotorXSend_Click(object sender, EventArgs e)
     {
-        TextBox[] textBoxes = new[] { tbMotorXSpeed, tbMotorXRelative, tbMotorXAbsolute, tbMotorXAbsoluteEnd, tbMotorXLoop };
+        var textBoxes = pMotorX.Controls.OfType<TextBox>().ToList();
         try
         {
             var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
@@ -303,17 +303,13 @@ public partial class Form1 : Form
         }
         finally
         {
-            tbMotorXSpeed.Text = "";
-            tbMotorXRelative.Text = "";
-            tbMotorXAbsolute.Text = "";
-            tbMotorXAbsoluteEnd.Text = "";
-            tbMotorXLoop.Text = "";
+            textBoxes.ForEach(textBox => textBox.Text = "");
         }
     }
 
     private void btnMotorYSend_Click(object sender, EventArgs e)
     {
-        TextBox[] textBoxes = new[] { tbMotorYSpeed, tbMotorYRelative, tbMotorYAbsolute, tbMotorYAbsoluteEnd, tbMotorYLoop };
+        var textBoxes = pMotorY.Controls.OfType<TextBox>().ToList();
         try
         {
             var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
@@ -325,17 +321,13 @@ public partial class Form1 : Form
         }
         finally
         {
-            tbMotorYSpeed.Text = "";
-            tbMotorYRelative.Text = "";
-            tbMotorYAbsolute.Text = "";
-            tbMotorYAbsoluteEnd.Text = "";
-            tbMotorYLoop.Text = "";
+            textBoxes.ForEach(textBox => textBox.Text = ""); ;
         }
     }
 
     private void btnMotorZSend_Click(object sender, EventArgs e)
     {
-        TextBox[] textBoxes = new[] { tbMotorZSpeed, tbMotorZRelative, tbMotorZAbsolute, tbMotorZAbsoluteEnd, tbMotorZLoop };
+        var textBoxes = pMotorZ.Controls.OfType<TextBox>().ToList();
         try
         {
             var firstTextBox = textBoxes.Where(textBox => textBox.Text != "" && int.TryParse(textBox.Text, out int a)).First();
@@ -347,11 +339,7 @@ public partial class Form1 : Form
         }
         finally
         {
-            tbMotorZSpeed.Text = "";
-            tbMotorZRelative.Text = "";
-            tbMotorZAbsolute.Text = "";
-            tbMotorZAbsoluteEnd.Text = "";
-            tbMotorZLoop.Text = "";
+            textBoxes.ForEach(textBox => textBox.Text = ""); ;
         }
     }
 }
